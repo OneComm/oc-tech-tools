@@ -1,6 +1,6 @@
 import React from "react";
 import { GenerateHex } from "../../api/dhcp";
-import { Container, Row, Col, Form, FloatingLabel, Button, Collapse, Table } from 'react-bootstrap';
+import { Container, Row, Col, Form, FloatingLabel, Button, Collapse } from 'react-bootstrap';
 
 function Dhcp() {
 
@@ -151,50 +151,41 @@ function Dhcp() {
         </Row>
       </Form>
       <Collapse in={ open }>
-        <Row>
-          <Table>
-            <tbody>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td><b>Hex String</b></td>
-                <td>{ hexData.unformatted }</td>
-                <td>
-                  <Button
-                    onClick={ () => navigator.clipboard.writeText() }
-                  >
-                    Copy
-                  </Button>
-                </td>
-              </tr>
-              <tr>
-                <td><b>Sophos Hex String</b></td>
-                <td>{ hexData.formatted }</td>
-                <td>
-                  <Button
-                    onClick={ () => navigator.clipboard.writeText() }
-                  >
-                    Copy
-                  </Button>
-                </td>
-              </tr>
-              <tr>
-                <td><b>ASCII String</b></td>
-                <td>{ hexData.ascii }</td>
-                <td>
-                  <Button
-                    onClick={ () => navigator.clipboard.writeText() }
-                  >
-                    Copy
-                  </Button>
-                </td>
-              </tr>
-            </tbody>
-          </Table>
-        </Row>
+        <div className="mb-3 tex-wrap">
+          <Row>
+            <Col>Hex String</Col>
+            <Col xs={6}>{ hexData.unformatted }</Col>
+            <Col>
+              <Button
+                onClick={ () => navigator.clipboard.writeText(hexData.unformatted) }
+              >
+                Copy
+              </Button>
+            </Col>
+          </Row>
+          <Row>
+            <Col>Sophos Hex String</Col>
+            <Col xs={6} className="text-wrap">{ hexData.formatted }</Col>
+            <Col>
+              <Button
+                onClick={ () => navigator.clipboard.writeText(hexData.formatted) }
+              >
+                Copy
+              </Button>
+            </Col>
+          </Row>
+          <Row>
+            <Col>ASCII String</Col>
+            <Col xs={6}>{ hexData.ascii }</Col>
+            <Col>
+              <Button
+                onClick={ () => navigator.clipboard.writeText(hexData.ascii) }
+              >
+                Copy
+              </Button>
+            </Col>
+          </Row>
+        </div>
       </Collapse>
     </Container>
   );

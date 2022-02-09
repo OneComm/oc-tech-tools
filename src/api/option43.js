@@ -3,7 +3,11 @@ import { HexWithColons } from "./hexWithColons";
 function GenerateHex (obj) {
   var type = obj.type;
   var ip = obj.ip;
-  var aa, bb, vc, hexResult, formattedHex;
+  var aa = ""; 
+  var bb = "";
+  var vc = "";
+  var hexResult = "";
+  var formattedHex = "";
 
   if (type === "SCG") {
     aa = "06";
@@ -11,7 +15,7 @@ function GenerateHex (obj) {
     aa = "03";
   }
   
-  bb = "0" + (ip.length).toString(16);
+  bb = "0" + (ip.length).toString(16).toUpperCase();
 
   var i, hex;
   for (i=0; i<ip.length; i++) {
@@ -19,7 +23,7 @@ function GenerateHex (obj) {
     vc += hex;
   }
 
-  hexResult = aa + bb + vc;
+  hexResult = aa + bb + vc.toUpperCase();
 
   formattedHex = HexWithColons(hexResult, 2, ":");
 
