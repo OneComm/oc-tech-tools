@@ -1,13 +1,13 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body{
+  padding-top:70px;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* fix padding under menu after resize */
+@media screen and (max-width: 767px) {
+  body { padding-top: 60px; }
+}
+@media screen and (min-width:768px) and (max-width: 991px) {
+  body { padding-top: 110px; }
+}
+@media screen and (min-width: 992px) {
+  body { padding-top: 60px; }
 }
