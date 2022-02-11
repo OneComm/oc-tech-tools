@@ -1,5 +1,5 @@
 import React from 'react';
-import { GenerateHex } from '../../api/option43'
+import { GenerateHex } from '../api/option43'
 import { Container, Row, Col, Accordion, Form, Button, Collapse, Table } from 'react-bootstrap';
 
 function Option43() {

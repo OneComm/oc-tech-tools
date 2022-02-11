@@ -1,5 +1,5 @@
 import React from "react";
-import { GenerateHex } from "../../api/dhcp";
+import { GenerateHex } from "../api/dhcp";
 import { Container, Row, Col, Form, FloatingLabel, Button, Collapse } from 'react-bootstrap';
 
 function Dhcp() {
