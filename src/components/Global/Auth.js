@@ -1,5 +1,5 @@
 import React from "react";
-import logo from '../assets/img/logo.svg';
+import logo from '../../assets/img/logo.svg';
 import { Container, Card, Button } from 'react-bootstrap';
 
 function Home(props) {

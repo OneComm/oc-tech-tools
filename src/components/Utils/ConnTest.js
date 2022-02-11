@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Container, Row } from 'react-bootstrap';
-import { SpeedTest } from '../api/speedtest';
+import { SpeedTest } from '../../api/speedtest';
 
 function ConnTest() {
 

@@ -3,12 +3,12 @@ import {
   UnauthenticatedTemplate,
   useMsal,
 } from '@azure/msal-react';
-import Auth from './components/Auth'
-import Header from './components/Header';
+import Auth from './components/Global/Auth'
+import Header from './components/Global/Header';
 import Home from './components/Home';
-import Option43 from './components/Option43';
-import Dhcp from './components/Dhcp';
-import ConnTest from './components/ConnTest';
+import Option43 from './components/Utils/Option43';
+import Dhcp from './components/Utils/Dhcp';
+import ConnTest from './components/Utils/ConnTest';
 import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -33,7 +33,7 @@ export default function App() {
             <Route exact path="/" element={ <Home /> } />
             <Route exact path="/utils/opt43" element= { <Option43 /> } />
             <Route exact path="/utils/dhcp" element= { <Dhcp /> } />
-            {/* // <Route exact path="/conntest" element= { <ConnTest /> } /> */}
+            {/* // <Route exact path="/utils/conntest" element= { <ConnTest /> } /> */}
           </Routes>
         </Router>
       </AuthenticatedTemplate>

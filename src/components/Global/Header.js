@@ -1,6 +1,6 @@
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import logo from '../assets/img/logo.svg';
+import logo from '../../assets/img/logo.svg';
 
 function Header(props) {
   const { instance, accounts } = props;
