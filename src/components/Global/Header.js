@@ -29,10 +29,10 @@ function Header(props) {
           </LinkContainer>
           <Nav className="me-auto">
             <LinkContainer to="/"><Nav.Link>Home</Nav.Link></LinkContainer>
-            {/* <LinkContainer to="/conntest"><Nav.Link>Connection Test</Nav.Link></LinkContainer> */}
             <NavDropdown title="Utilities" id="utils-dropdown">
               <LinkContainer to="/utils/opt43"><NavDropdown.Item>Option 43 Generator</NavDropdown.Item></LinkContainer>
               <LinkContainer to="/utils/dhcp"><NavDropdown.Item>DHCP Helper</NavDropdown.Item></LinkContainer>
+              {/* <LinkContainer to="/conntest"><NavDropdown.Item>Connection Test</NavDropdown.Item></LinkContainer> */}
             </NavDropdown>
           </Nav>
           <Nav>

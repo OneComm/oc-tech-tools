@@ -33,7 +33,7 @@ export default function App() {
             <Route exact path="/" element={ <Home /> } />
             <Route exact path="/utils/opt43" element= { <Option43 /> } />
             <Route exact path="/utils/dhcp" element= { <Dhcp /> } />
-            {/* // <Route exact path="/utils/conntest" element= { <ConnTest /> } /> */}
+            <Route exact path="/utils/conntest" element= { <ConnTest /> } />
           </Routes>
         </Router>
       </AuthenticatedTemplate>
