@@ -11,7 +11,7 @@ function GenerateHex (obj) {
   var hexResult = "";
   var formattedHex = "";
 
-  var ascii = "id:" + id + ";sw_tftp:" + sw_tftp + ";call_srv:" + call_srv + ";vlan:" + vlan + ";l2p:" + l2p + ";dscp:" + dscp + ";";
+  var ascii = "id:" + id + ";sw_tftp=" + sw_tftp + ";call_srv=" + call_srv + ";vlan=" + vlan + ";l2p=" + l2p + ";dscp=" + dscp + ";";
   var i, hex;
   for (i=0; i<ascii.length; i++) {
     hex = ascii.charCodeAt(i).toString(16);
