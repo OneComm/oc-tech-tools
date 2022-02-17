@@ -1,6 +1,6 @@
 import React from 'react';
 import { GenerateHex } from '../../api/option43'
-import { Container, Row, Col, Accordion, Form, Button, Collapse, Table } from 'react-bootstrap';
+import { Container, Row, Col, Accordion, Form, Button, Collapse } from 'react-bootstrap';
 
 function Option43() {
 
@@ -64,44 +64,41 @@ function Option43() {
         </Row>
       </Form>
       <Collapse in={ open }>
-        <Row>
-          <Table>
-            <tbody>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td><b>IP Address</b></td>
-                <td>{ hexData.ip }</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td><b>Hex String</b></td>
-                <td>{ hexData.unformatted }</td>
-                <td>
-                  <Button
-                    onClick={ () => navigator.clipboard.writeText(hexData.unformatted) }
-                  >
-                    Copy
-                  </Button>
-                </td>
-              </tr>
-              <tr>
-                <td><b>Sophos Option</b></td>
-                <td>{ hexData.formatted }</td>
-                <td>
-                  <Button
-                    onClick={ () => navigator.clipboard.writeText(hexData.formatted) }
-                  >
-                    Copy
-                  </Button>
-                </td>
-              </tr>
-            </tbody>
-          </Table>
-        </Row>
+        <Container>
+          <Row className="mb-2">
+            <Col><b>IP Address</b></Col>
+            <Col>
+             <Form.Control type="text" disabled value={ hexData.ip } />
+            </Col>
+            <Col></Col>
+          </Row>
+          <Row className="mb-2">
+            <Col><b>Hex String</b></Col>
+            <Col>
+              <Form.Control type="text" disabled value={ hexData.unformatted } />
+            </Col>
+            <Col>
+              <Button
+                onClick={ () => navigator.clipboard.writeText(hexData.unformatted) }
+              >
+                Copy
+              </Button>
+            </Col>
+          </Row>
+          <Row className="mb-2">
+            <Col><b>Sophos Option</b></Col>
+            <Col>
+              <Form.Control type="text" disabled value={ hexData.formatted } />
+            </Col>
+            <Col>
+              <Button
+                onClick={ () => navigator.clipboard.writeText(hexData.formatted) }
+              >
+                Copy
+              </Button>
+            </Col>
+          </Row>
+        </Container>
       </Collapse>
       <Row>
         <Accordion>

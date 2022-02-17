@@ -151,10 +151,12 @@ function Dhcp() {
         </Row>
       </Form>
       <Collapse in={ open }>
-        <div className="mb-3 tex-wrap">
-          <Row>
-            <Col>Hex String</Col>
-            <Col xs={6}>{ hexData.unformatted }</Col>
+        <div>
+          <Row className="mb-2">
+            <Col><b>Hex String</b></Col>
+            <Col>
+              <Form.Control as="textarea" style={{height: "130px"}} disabled value={ hexData.unformatted } />
+            </Col>
             <Col>
               <Button
                 onClick={ () => navigator.clipboard.writeText(hexData.unformatted) }
@@ -163,9 +165,11 @@ function Dhcp() {
               </Button>
             </Col>
           </Row>
-          <Row>
-            <Col>Sophos Hex String</Col>
-            <Col xs={6} className="text-wrap">{ hexData.formatted }</Col>
+          <Row className="mb-2">
+            <Col><b>Sophos Hex String</b></Col>
+            <Col>
+              <Form.Control as="textarea" style={{height: "160px"}} disabled value={ hexData.formatted } />
+            </Col>
             <Col>
               <Button
                 onClick={ () => navigator.clipboard.writeText(hexData.formatted) }
@@ -174,9 +178,11 @@ function Dhcp() {
               </Button>
             </Col>
           </Row>
-          <Row>
-            <Col>ASCII String</Col>
-            <Col xs={6}>{ hexData.ascii }</Col>
+          <Row className="mb-2">
+            <Col><b>ASCII String</b></Col>
+            <Col>
+              <Form.Control as="textarea" style={{height: "70px"}} disabled value={ hexData.ascii } />
+            </Col>
             <Col>
               <Button
                 onClick={ () => navigator.clipboard.writeText(hexData.ascii) }
