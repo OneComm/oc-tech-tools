@@ -32,8 +32,6 @@ export default function App() {
           <GetHeader />
           <Routes>
             <Route exact path="/" element={ <Home /> } />
-            <Route exact path="/projects" element={ <Projects /> } />
-            <Route exact path="/project" element={ <Project /> } />
             <Route exact path="/utils/opt43" element={ <Option43 /> } />
             <Route exact path="/utils/dhcp" element={ <Dhcp /> } />
             <Route path="*" element={ <NotFound />} />
