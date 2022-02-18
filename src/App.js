@@ -7,8 +7,6 @@ import Auth from './components/Global/Auth'
 import Header from './components/Global/Header';
 import Footer from './components/Global/Footer';
 import Home from './components/Home';
-import Projects from './components/Projects';
-import Project from './components/Project';
 import Option43 from './components/Utils/Option43';
 import Dhcp from './components/Utils/Dhcp';
 import NotFound from './components/Global/NotFound';
