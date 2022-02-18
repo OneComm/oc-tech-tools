@@ -50,9 +50,6 @@ function Dhcp() {
 
   return (
     <Container>
-      <Row className="mb-3">
-        <p>This is the DHCP file.</p>
-      </Row>
       <Form onSubmit={ handleSubmit }>
         <Row className="mb-3">
           <Form.Group as={ Col }>
