@@ -11,7 +11,6 @@ import Projects from './components/Projects';
 import Project from './components/Project';
 import Option43 from './components/Utils/Option43';
 import Dhcp from './components/Utils/Dhcp';
-// import ConnTest from './components/Utils/ConnTest';
 import NotFound from './components/Global/NotFound';
 import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -39,7 +38,6 @@ export default function App() {
             <Route exact path="/project" element={ <Project /> } />
             <Route exact path="/utils/opt43" element={ <Option43 /> } />
             <Route exact path="/utils/dhcp" element={ <Dhcp /> } />
-            {/* <Route exact path="/utils/conntest" element={ <ConnTest /> } /> */}
             <Route path="*" element={ <NotFound />} />
           </Routes>
           <Footer />
