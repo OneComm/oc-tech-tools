@@ -6,7 +6,7 @@ export default function Footer() {
       <div class="text-center p-3" style={{backgroundColor: "rgba(0, 0, 0, 0.2);"}}>
         © 2022 Copyright:&nbsp;
         <a class="text-dark" href="https://one-comm.com/">One Communications</a><br />
-        Made with ♥️ in Arkansas.
+        Made with ♥️ in React.
       </div>
     </footer>
   )
