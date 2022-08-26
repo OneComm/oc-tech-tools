@@ -1,6 +1,6 @@
 import React from "react";
 import { GenerateHex } from "../../api/dhcp";
-import { Container, Row, Col, Form, FloatingLabel, Button, Collapse } from 'react-bootstrap';
+import { Row, Col, Form, FloatingLabel, Button, Collapse } from 'react-bootstrap';
 
 function Dhcp() {
 
@@ -144,7 +144,7 @@ function Dhcp() {
           </Form.Group>
         </Row>
         <Row className="mb-3">
-          <Button onClick={ handleSubmit }>Generate</Button>
+          <Button bsPrefix='oc-btn-primary' onClick={ handleSubmit }>Generate</Button>
         </Row>
       </Form>
       <Collapse in={ open }>
@@ -156,6 +156,7 @@ function Dhcp() {
             </Col>
             <Col>
               <Button
+                bsPrefix='oc-btn-primary'
                 onClick={ () => navigator.clipboard.writeText(hexData.unformatted) }
               >
                 Copy
@@ -169,6 +170,7 @@ function Dhcp() {
             </Col>
             <Col>
               <Button
+                bsPrefix='oc-btn-primary'
                 onClick={ () => navigator.clipboard.writeText(hexData.formatted) }
               >
                 Copy
@@ -182,6 +184,7 @@ function Dhcp() {
             </Col>
             <Col>
               <Button
+                bsPrefix='oc-btn-primary'
                 onClick={ () => navigator.clipboard.writeText(hexData.ascii) }
               >
                 Copy
