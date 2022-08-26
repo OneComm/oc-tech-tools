@@ -6,7 +6,10 @@ import {
 import Auth from './components/Global/Auth'
 import Header from './components/Global/Header';
 import Footer from './components/Global/Footer';
+import Navigation from './components/Global/Navigation';
 import Home from './components/Home';
+import Sows from './components/Sows';
+import Sow from './components/Sow';
 import Option43 from './components/Utils/Option43';
 import Dhcp from './components/Utils/Dhcp';
 import NotFound from './components/Global/NotFound';
@@ -29,9 +32,12 @@ export default function App() {
     <>
       <AuthenticatedTemplate>
         <Router>
+          <Navigation />
           <GetHeader />
           <Routes>
             <Route exact path="/" element={ <Home /> } />
+            <Route exact path="/sow" element={ <Sows /> } />
+            <Route exact path="/sow/:id" element={ <Sow /> } />
             <Route exact path="/utils/opt43" element={ <Option43 /> } />
             <Route exact path="/utils/dhcp" element={ <Dhcp /> } />
             <Route path="*" element={ <NotFound />} />

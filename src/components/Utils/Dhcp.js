@@ -49,7 +49,7 @@ function Dhcp() {
   };
 
   return (
-    <Container>
+    <div className="page-content p-3">
       <Form onSubmit={ handleSubmit }>
         <Row className="mb-3">
           <Form.Group as={ Col }>
@@ -190,7 +190,7 @@ function Dhcp() {
           </Row>
         </div>
       </Collapse>
-    </Container>
+    </div>
   );
 }
 

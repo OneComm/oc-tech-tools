@@ -5,27 +5,31 @@ import { SpeedTest } from '../../api/speedtest';
 function ConnTest() {
 
   const initialSpeedData = {
-    rtt: "0",
-    down: "0",
-    up: "0"
+    ping: "0",
+    dls: "0",
+    uls: "0"
   }
 
   const [speedData, updateSpeedData] = React.useState(initialSpeedData);
 
   useEffect(() => {
-    var result = SpeedTest();
-    updateSpeedData({
-      rtt: result.rtt,
-      down: result.down.humanDl,
-      up: result.up.humanDl
-    })
+    try {
+      var result = SpeedTest();
+      updateSpeedData({
+        ping: result.ping,
+        dls: result.downloadSpeed,
+        uls: result.up.uploadSpeed
+      })
+    } catch (error) {
+      console.log(error);
+    }
   }, [])
 
   return (
     <Container>
       <Row className="mb-3">
         <p>This is the Conn Test file.</p>
-        <p>RTT: { speedData.rtt }ms Download: { speedData.down } Upload: { speedData.up }</p>
+        <p>RTT: { speedData.ping }ms Download: { speedData.dls } Upload: { speedData.uls }</p>
       </Row>
     </Container>
   );

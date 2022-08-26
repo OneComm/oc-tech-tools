@@ -40,7 +40,7 @@ function Option43() {
   };
 
   return (
-    <Container>
+    <div className='page-content p-3'>
       <Row className="mb-3">
         <p>Input the IP address of the controller below and hit submit for option 43 formatted for windows and Sophos DHCP.</p>
       </Row>
@@ -123,7 +123,7 @@ function Option43() {
           </Accordion.Item>
         </Accordion>
       </Row>
-    </Container>
+    </div>
   );
 }
 
