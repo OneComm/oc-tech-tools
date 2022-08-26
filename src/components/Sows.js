@@ -18,7 +18,10 @@ function Sows() {
               </tr>
             </thead>
             <tbody>
-              <LinkContainer to="#" style={{cursor:'pointer'}}>
+              <LinkContainer 
+                to="/sow/1234" 
+                style={{cursor:'pointer'}}
+                isActive={() => window.location.hash.indexOf('/sow') > -1}>
                 <tr>
                   <td>Test Project</td>
                   <td>9987652</td>
@@ -27,7 +30,10 @@ function Sows() {
                   <td>Scoped</td>
                 </tr>
               </LinkContainer>
-              <LinkContainer to="#" style={{cursor:'pointer'}}>
+              <LinkContainer 
+                to="/sow/1234" 
+                style={{cursor:'pointer'}}
+                isActive={() => window.location.hash.indexOf('/sow') > -1}>
                 <tr>
                   <td>Test Project</td>
                   <td>9987642</td>
@@ -36,7 +42,10 @@ function Sows() {
                   <td>In Progress</td>
                 </tr>
               </LinkContainer>
-              <LinkContainer to="#" style={{cursor:'pointer'}}>
+              <LinkContainer 
+                to="/sow/1234" 
+                style={{cursor:'pointer'}}
+                isActive={() => window.location.hash.indexOf('/sow') > -1}>
                 <tr>
                   <td>Test Project</td>
                   <td>9987632</td>

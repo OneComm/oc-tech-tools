@@ -20,7 +20,7 @@ function Navigation() {
             <Nav className="flex-column">
               <Navbar.Text as='h6' className='text-uppercase text-white'>Applications</Navbar.Text>
               <LinkContainer to="/"><Nav.Link>Home</Nav.Link></LinkContainer>
-              {/* <LinkContainer to="/sow"><Nav.Link>SOW</Nav.Link></LinkContainer> */}
+              <LinkContainer to="/sow"><Nav.Link>Scope of Work</Nav.Link></LinkContainer>
               <hr/>
               <Navbar.Text as='h6' className='text-uppercase text-white'>Utilities</Navbar.Text>
               <LinkContainer to="/utils/opt43"><Nav.Link>Option 43 Generator</Nav.Link></LinkContainer>
@@ -30,7 +30,10 @@ function Navigation() {
           </Navbar>
         </div>
       </div>
-      <img src={ocLogo} alt="" width={190} className="fixed-bottom py-4 px-3" />{' '}
+      <div className="fixed-bottom py-4 px-3 ">
+        <img src={ocLogo} alt="" width={190} className="py-2" />{' '}
+        <p>v0.2.a. | <a href='mailto:jgeorge@one-comm.com' style={{color:'white'}}>Submit Bugs</a></p>
+      </div>
     </div>
   );
 }

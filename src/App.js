@@ -5,7 +5,6 @@ import {
 } from '@azure/msal-react';
 import Auth from './components/Global/Auth'
 import Header from './components/Global/Header';
-import Footer from './components/Global/Footer';
 import Navigation from './components/Global/Navigation';
 import Home from './components/Home';
 import Sows from './components/Sows';
@@ -42,7 +41,6 @@ export default function App() {
             <Route exact path="/utils/dhcp" element={ <Dhcp /> } />
             <Route path="*" element={ <NotFound />} />
           </Routes>
-          <Footer />
         </Router>
       </AuthenticatedTemplate>
       <UnauthenticatedTemplate>
