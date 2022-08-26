@@ -16,21 +16,17 @@ function Navigation() {
         </div>
         <hr />
         <div className='p-4'>
-          <h6>Applications</h6>
           <Navbar variant='dark'>
-          <Nav className="flex-column">
-            <LinkContainer to="/"><Nav.Link>Home</Nav.Link></LinkContainer>
-            <LinkContainer to="/sow"><Nav.Link>SOW</Nav.Link></LinkContainer>
-          </Nav>
-          </Navbar>
-          <hr />
-          <h6>Utilities</h6>
-          <Navbar variant='dark'>
-          <Nav className='flex-column'>
-            <LinkContainer to="/utils/opt43"><Nav.Link>Option 43 Generator</Nav.Link></LinkContainer>
-            <LinkContainer to="/utils/dhcp"><Nav.Link>DHCP Helper</Nav.Link></LinkContainer>
-            {/* <LinkContainer to="/utils/conntest"><Nav.Link>Connection Test</Nav.Link></LinkContainer> */}
-          </Nav>
+            <Nav className="flex-column">
+              <Navbar.Text as='h6' className='text-uppercase text-white'>Applications</Navbar.Text>
+              <LinkContainer to="/"><Nav.Link>Home</Nav.Link></LinkContainer>
+              <LinkContainer to="/sow"><Nav.Link>SOW</Nav.Link></LinkContainer>
+              <hr/>
+              <Navbar.Text as='h6' className='text-uppercase text-white'>Utilities</Navbar.Text>
+              <LinkContainer to="/utils/opt43"><Nav.Link>Option 43 Generator</Nav.Link></LinkContainer>
+              <LinkContainer to="/utils/dhcp"><Nav.Link>DHCP Helper</Nav.Link></LinkContainer>
+              {/* <LinkContainer to="/utils/conntest"><Nav.Link>Connection Test</Nav.Link></LinkContainer> */}
+            </Nav>
           </Navbar>
         </div>
       </div>
