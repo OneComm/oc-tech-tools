@@ -20,7 +20,7 @@ function Navigation() {
             <Nav className="flex-column">
               <Navbar.Text as='h6' className='text-uppercase text-white'>Applications</Navbar.Text>
               <LinkContainer to="/"><Nav.Link>Home</Nav.Link></LinkContainer>
-              <LinkContainer to="/sow"><Nav.Link>SOW</Nav.Link></LinkContainer>
+              {/* <LinkContainer to="/sow"><Nav.Link>SOW</Nav.Link></LinkContainer> */}
               <hr/>
               <Navbar.Text as='h6' className='text-uppercase text-white'>Utilities</Navbar.Text>
               <LinkContainer to="/utils/opt43"><Nav.Link>Option 43 Generator</Nav.Link></LinkContainer>
