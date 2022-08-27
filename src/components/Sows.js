@@ -7,55 +7,59 @@ function Sows() {
     <div className="page-content p-3">
       <Row className="mb-3">
         <Col>
-          <Table hover>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>SOW#</th>
-                <th>Components</th>
-                <th>Owner</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <LinkContainer 
-                to="/sow/1234" 
-                style={{cursor:'pointer'}}
-                isActive={() => window.location.hash.indexOf('/sow') > -1}>
-                <tr>
-                  <td>Test Project</td>
-                  <td>9987652</td>
-                  <td>Data, Voice, Wifi</td>
-                  <td>Lee Burnett</td>
-                  <td>Scoped</td>
-                </tr>
-              </LinkContainer>
-              <LinkContainer 
-                to="/sow/1234" 
-                style={{cursor:'pointer'}}
-                isActive={() => window.location.hash.indexOf('/sow') > -1}>
-                <tr>
-                  <td>Test Project</td>
-                  <td>9987642</td>
-                  <td>Data, Voice, Wifi</td>
-                  <td>Jonathan George</td>
-                  <td>In Progress</td>
-                </tr>
-              </LinkContainer>
-              <LinkContainer 
-                to="/sow/1234" 
-                style={{cursor:'pointer'}}
-                isActive={() => window.location.hash.indexOf('/sow') > -1}>
-                <tr>
-                  <td>Test Project</td>
-                  <td>9987632</td>
-                  <td>Data, Voice, Wifi</td>
-                  <td>Wes Marques</td>
-                  <td>Complete</td>
-                </tr>
-              </LinkContainer>
-            </tbody>
-          </Table>
+          <Card>
+            <Card.Body>
+              <Table hover>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>SOW#</th>
+                    <th>Components</th>
+                    <th>Owner</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <LinkContainer 
+                    to="/sow/1234" 
+                    style={{cursor:'pointer'}}
+                    isActive={() => window.location.hash.indexOf('/sow') > -1}>
+                    <tr>
+                      <td>Test Project</td>
+                      <td>9987652</td>
+                      <td>Data, Voice, Wifi</td>
+                      <td>Lee Burnett</td>
+                      <td>Scoped</td>
+                    </tr>
+                  </LinkContainer>
+                  <LinkContainer 
+                    to="/sow/1234" 
+                    style={{cursor:'pointer'}}
+                    isActive={() => window.location.hash.indexOf('/sow') > -1}>
+                    <tr>
+                      <td>Test Project</td>
+                      <td>9987642</td>
+                      <td>Data, Voice, Wifi</td>
+                      <td>Jonathan George</td>
+                      <td>In Progress</td>
+                    </tr>
+                  </LinkContainer>
+                  <LinkContainer 
+                    to="/sow/1234" 
+                    style={{cursor:'pointer'}}
+                    isActive={() => window.location.hash.indexOf('/sow') > -1}>
+                    <tr>
+                      <td>Test Project</td>
+                      <td>9987632</td>
+                      <td>Data, Voice, Wifi</td>
+                      <td>Wes Marques</td>
+                      <td>Complete</td>
+                    </tr>
+                  </LinkContainer>
+                </tbody>
+              </Table>
+            </Card.Body>
+          </Card>
         </Col>
         <Col xs lg="3">
           <Card>
