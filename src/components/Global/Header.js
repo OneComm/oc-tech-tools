@@ -10,7 +10,7 @@ function Header(props) {
   }
 
   return (
-      <div className='page-content fixed-top'>
+      <div className='page-content fixed-top border-bottom'>
         <Navbar bg="light">
           <Nav className='me-auto'>
           </Nav>

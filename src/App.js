@@ -6,7 +6,7 @@ import {
 import Auth from './components/Global/Auth'
 import Header from './components/Global/Header';
 import Navigation from './components/Global/Navigation';
-import Home from './components/Home';
+import Dashboard from './components/Dashboard';
 import Sows from './components/Sows';
 import Sow from './components/Sow';
 import Option43 from './components/Utils/Option43';
@@ -34,7 +34,7 @@ export default function App() {
           <Navigation />
           <GetHeader />
           <Routes>
-            <Route exact path="/" element={ <Home /> } />
+            <Route exact path="/" element={ <Dashboard /> } />
             <Route exact path="/sow" element={ <Sows /> } />
             <Route exact path="/sow/:id" element={ <Sow /> } />
             <Route exact path="/utils/opt43" element={ <Option43 /> } />

@@ -23,6 +23,10 @@
   body { padding-top: 80px; }
 }
 
+body {
+  background-color: rgba(246, 246, 246, 1) !important;
+}
+
 .oc-btn-primary {
   color: #fff;
   background-color: rgba(0, 49, 88, 1);
@@ -54,7 +58,6 @@
 
 .page-content {
   width: calc(100% - 17rem);
-  height: 100px;
   margin-left: 17rem;
   transition: all 0.4s;
 }
