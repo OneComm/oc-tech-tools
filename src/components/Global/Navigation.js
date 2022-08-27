@@ -19,7 +19,7 @@ function Navigation() {
           <Navbar variant='dark'>
             <Nav className="flex-column">
               <Navbar.Text as='h6' className='text-uppercase text-white'>Applications</Navbar.Text>
-              <LinkContainer to="/"><Nav.Link>Home</Nav.Link></LinkContainer>
+              <LinkContainer to="/"><Nav.Link>Dashboard</Nav.Link></LinkContainer>
               <LinkContainer to="/sow"><Nav.Link>Scope of Work</Nav.Link></LinkContainer>
               <hr/>
               <Navbar.Text as='h6' className='text-uppercase text-white'>Utilities</Navbar.Text>
