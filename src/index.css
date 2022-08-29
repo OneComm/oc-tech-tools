@@ -25,6 +25,7 @@
 
 body {
   background-color: rgba(246, 246, 246, 1) !important;
+  padding-top: 75px !important;
 }
 
 .oc-btn-primary {
