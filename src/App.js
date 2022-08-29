@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   AuthenticatedTemplate,
   UnauthenticatedTemplate,
@@ -15,7 +15,6 @@ import Dhcp from './components/Utils/Dhcp';
 import NotFound from './components/Global/NotFound';
 import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Loading from './components/Global/Loading';
 
 function SignIn() {
   const { instance } = useMsal();
@@ -29,22 +28,6 @@ function GetHeader() {
 }
 
 export default function App() {
-  const [loading,setLoading] = useState(true);
-
-  useEffect(() => {
-    // Loading function to load data or 
-    // fake it using setTimeout;
-    const loadData = async () => {
-
-      // Wait for two second
-      await new Promise((r) => setTimeout(r, 2000));
-
-      // Toggle loading state
-      setLoading(false);
-    };
-      
-    loadData();
-  }, [])
 
   return (
     <>
@@ -52,18 +35,14 @@ export default function App() {
         <Router>
           <Navigation />
           <GetHeader />
-          {loading ?
-            <Loading />
-          :
-            <Routes>
-              <Route exact path="/" element={ <Dashboard /> } />
-              <Route exact path="/sow" element={ <Sows /> } />
-              <Route exact path="/sow/:id" element={ <Sow /> } />
-              <Route exact path="/utils/opt43" element={ <Option43 /> } />
-              <Route exact path="/utils/dhcp" element={ <Dhcp /> } />
-              <Route path="*" element={ <NotFound />} />
-            </Routes>
-          }
+          <Routes>
+            <Route exact path="/" element={ <Dashboard /> } />
+            <Route exact path="/sow" element={ <Sows /> } />
+            <Route exact path="/sow/:id" element={ <Sow /> } />
+            <Route exact path="/utils/opt43" element={ <Option43 /> } />
+            <Route exact path="/utils/dhcp" element={ <Dhcp /> } />
+            <Route path="*" element={ <NotFound />} />
+          </Routes>
         </Router>
       </AuthenticatedTemplate>
       <UnauthenticatedTemplate>
