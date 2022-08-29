@@ -23,24 +23,10 @@ function Navigation(functionLoading) {
             <Nav className="flex-column">
               <Navbar.Text as='h6' className='text-uppercase text-white'>Applications</Navbar.Text>
               <LinkContainer to="/"><Nav.Link>Dashboard</Nav.Link></LinkContainer>
-              <LinkContainer to="/sow">
-                <OverlayTrigger
-                  key='sow'
-                  placement='right'
-                  overlay={
-                    <Tooltip id={`tooltip-right`}>
-                      Scope of Work Tool
-                    </Tooltip>
-                  }
-                >
-                  <Nav.Link>SOW</Nav.Link>
-                </OverlayTrigger>
-              </LinkContainer>
               <hr/>
               <Navbar.Text as='h6' className='text-uppercase text-white'>Utilities</Navbar.Text>
               <LinkContainer to="/utils/opt43"><Nav.Link>Option 43 Generator</Nav.Link></LinkContainer>
               <LinkContainer to="/utils/dhcp"><Nav.Link>DHCP Helper</Nav.Link></LinkContainer>
-              {/* <LinkContainer to="/utils/conntest"><Nav.Link>Connection Test</Nav.Link></LinkContainer> */}
             </Nav>
           </Navbar>
         </div>
