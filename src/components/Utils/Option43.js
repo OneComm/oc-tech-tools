@@ -63,7 +63,7 @@ function Option43() {
               </Form.Group>
             </Row>
             <Row className="m-4">
-              <Button bsPrefix='oc-btn-primary' onClick={ handleSubmit }>Generate</Button>
+              <Button  onClick={ handleSubmit }>Generate</Button>
             </Row>
           </Form>
           <Collapse in={ open }>
@@ -82,7 +82,7 @@ function Option43() {
                 </Col>
                 <Col>
                   <Button
-                    bsPrefix='oc-btn-primary'
+                    
                     onClick={ () => navigator.clipboard.writeText(hexData.unformatted) }
                   >
                     Copy
@@ -96,7 +96,7 @@ function Option43() {
                 </Col>
                 <Col>
                   <Button
-                    bsPrefix='oc-btn-primary'
+                    
                     onClick={ () => navigator.clipboard.writeText(hexData.formatted) }
                   >
                     Copy
