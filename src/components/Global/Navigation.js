@@ -2,6 +2,7 @@ import { Nav, Navbar } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import logo from '../../assets/img/logo.svg';
 import ocLogo from '../../assets/img/oc-logo.png';
+import project from '../../../package.json';
 
 function Navigation() {
 
@@ -32,7 +33,7 @@ function Navigation() {
       </div>
       <div className="fixed-bottom py-4 px-3 ">
         <img src={ocLogo} alt="" width={190} className="py-2" />{' '}
-        <p>v0.2.a. | <a href='mailto:jgeorge@one-comm.com' style={{color:'white'}}>Submit Bugs</a></p>
+        <p>v{project.version}. | <a href='mailto:jgeorge@one-comm.com' style={{color:'white'}}>Submit Bugs</a></p>
       </div>
     </div>
   );
