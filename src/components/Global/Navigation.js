@@ -25,8 +25,32 @@ function Navigation(functionLoading) {
               <LinkContainer to="/"><Nav.Link>Dashboard</Nav.Link></LinkContainer>
               <hr/>
               <Navbar.Text as='h6' className='text-uppercase text-white'>Utilities</Navbar.Text>
-              <LinkContainer to="/utils/opt43"><Nav.Link>Option 43 Generator</Nav.Link></LinkContainer>
-              <LinkContainer to="/utils/dhcp"><Nav.Link>DHCP Helper</Nav.Link></LinkContainer>
+              <LinkContainer to="/utils/opt43">
+                <OverlayTrigger
+                  key='opt43'
+                  placement='right'
+                  overlay={
+                    <Tooltip id={`tooltip-right`}>
+                      Tool for generating DHCP option 43 hex strings
+                    </Tooltip>
+                  }
+                >
+                  <Nav.Link>Option 43 Generator</Nav.Link>
+                </OverlayTrigger>
+              </LinkContainer>
+              <LinkContainer to="/utils/dhcp">
+                <OverlayTrigger
+                  key='dhcp'
+                  placement='right'
+                  overlay={
+                    <Tooltip id={`tooltip-right`}>
+                      Tool for generating DHCP option 128 hex strings
+                    </Tooltip>
+                  }
+                >
+                  <Nav.Link>DHCP Helper</Nav.Link>
+                </OverlayTrigger>
+              </LinkContainer>
             </Nav>
           </Navbar>
         </div>
