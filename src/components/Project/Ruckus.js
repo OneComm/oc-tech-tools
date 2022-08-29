@@ -1,3 +1,4 @@
+import React from 'react';
 import {Row, Col, Collapse, Card, Form, FloatingLabel} from 'react-bootstrap';
 
 export default function Ruckus(props) {
