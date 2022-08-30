@@ -28,6 +28,10 @@ body {
   padding-top: 75px !important;
 }
 
+small {
+  font-size: xx-small !important;
+}
+
 .vertical-center {
   margin: 0;
   position: absolute;
