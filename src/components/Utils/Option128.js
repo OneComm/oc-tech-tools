@@ -2,7 +2,7 @@ import React from "react";
 import { GenerateHex } from "../../api/dhcp";
 import { Row, Col, Form, FloatingLabel, Button, Collapse, Card } from 'react-bootstrap';
 
-function Dhcp() {
+export default function Opt128() {
 
   const initialFormData = Object.freeze({
     id: "ipphone.mitel.com",
@@ -147,7 +147,7 @@ function Dhcp() {
               </Form.Group>
             </Row>
             <Row className="m-4">
-              <Button  onClick={ handleSubmit }>Generate</Button>
+              <Button onClick={ handleSubmit }>Generate</Button>
             </Row>
           </Form>
           <Collapse in={ open }>
@@ -201,5 +201,3 @@ function Dhcp() {
     </div>
   );
 }
-
-export default Dhcp;

@@ -8,10 +8,10 @@ import Auth from './components/Global/Auth'
 import Header from './components/Global/Header';
 import Navigation from './components/Global/Navigation';
 import Dashboard from './components/Dashboard';
-import Sows from './components/Sows';
-import Sow from './components/Sow';
+import Sows from './components/Sows/Sows';
+import Sow from './components/Sows/Sow';
 import Option43 from './components/Utils/Option43';
-import Dhcp from './components/Utils/Dhcp';
+import Option128 from './components/Utils/Option128';
 import NotFound from './components/Global/NotFound';
 import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -37,10 +37,10 @@ export default function App() {
           <GetHeader />
           <Routes>
             <Route exact path="/" element={ <Dashboard /> } />
-            <Route exact path="/sow" element={ <Sows /> } />
-            <Route exact path="/sow/:id" element={ <Sow /> } />
-            <Route exact path="/utils/opt43" element={ <Option43 /> } />
-            <Route exact path="/utils/dhcp" element={ <Dhcp /> } />
+            <Route path="/sow" element={ <Sows /> } />
+            <Route path="/sow/:id" element={ <Sow /> } />
+            <Route path="/utils/opt43" element={ <Option43 /> } />
+            <Route path="/utils/opt128" element={ <Option128 /> } />
             <Route path="*" element={ <NotFound />} />
           </Routes>
         </Router>

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Container, Row } from 'react-bootstrap';
 import { SpeedTest } from '../../api/speedtest';
 
-function ConnTest() {
+export default function ConnTest() {
 
   const initialSpeedData = {
     ping: "0",
@@ -34,5 +34,3 @@ function ConnTest() {
     </Container>
   );
 }
-
-export default ConnTest;

@@ -2,7 +2,7 @@ import React from 'react';
 import { GenerateHex } from '../../api/option43'
 import { Container, Row, Col, Accordion, Form, Button, Collapse, Card } from 'react-bootstrap';
 
-function Option43() {
+export default function Option43() {
 
   const initialFormData = Object.freeze({
     type: "",
@@ -133,5 +133,3 @@ function Option43() {
     </div>
   );
 }
-
-export default Option43;

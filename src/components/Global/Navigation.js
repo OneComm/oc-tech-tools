@@ -1,11 +1,12 @@
 import React from 'react';
-import { Nav, Navbar, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Nav, Navbar, OverlayTrigger,Tooltip } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import logo from '../../assets/img/logo.svg';
 import ocLogo from '../../assets/img/oc-logo.png';
 import project from '../../../package.json';
+import { Link } from 'react-router-dom';
 
-function Navigation(functionLoading) {
+export default function Navigation() {
   return (
     <div className='d-flex flex-column vertical-nav text-white' id='sidebar'>
       <div className="py-4 px-3 mb-4">
@@ -22,35 +23,48 @@ function Navigation(functionLoading) {
           <Navbar variant='dark'>
             <Nav className="flex-column">
               <Navbar.Text as='h6' className='text-uppercase text-white'>Applications</Navbar.Text>
-              <LinkContainer to="/"><Nav.Link>Dashboard</Nav.Link></LinkContainer>
+              <Link className='nav-link' to="/">Dashboard</Link>
+              <Link className='nav-link' to="/sow">
+                <OverlayTrigger
+                  key='sow'
+                  placement='right'
+                  overlay={
+                    <Tooltip>
+                      Tool for generating and working project scopes
+                    </Tooltip>
+                  }
+                >
+                  <p>SOW</p>
+                </OverlayTrigger>
+              </Link>
               <hr/>
               <Navbar.Text as='h6' className='text-uppercase text-white'>Utilities</Navbar.Text>
-              <LinkContainer to="/utils/opt43">
+              <Link className='nav-link' to="/utils/opt43">
                 <OverlayTrigger
-                  key='opt43'
+                  key='sow'
                   placement='right'
                   overlay={
-                    <Tooltip id={`tooltip-right`}>
-                      Tool for generating DHCP option 43 hex strings
+                    <Tooltip>
+                      Tool for generating option 43 hex strings
                     </Tooltip>
                   }
                 >
-                  <Nav.Link>Option 43 Generator</Nav.Link>
+                  <p>Option 43 Helper</p>
                 </OverlayTrigger>
-              </LinkContainer>
-              <LinkContainer to="/utils/dhcp">
+              </Link>
+              <Link className='nav-link' to="/utils/opt128">
                 <OverlayTrigger
-                  key='dhcp'
+                  key='sow'
                   placement='right'
                   overlay={
-                    <Tooltip id={`tooltip-right`}>
-                      Tool for generating DHCP option 128 hex strings
+                    <Tooltip>
+                      Tool for generating option 128 hex strings
                     </Tooltip>
                   }
                 >
-                  <Nav.Link>DHCP Helper</Nav.Link>
+                  <p>Option 128 Helper</p>
                 </OverlayTrigger>
-              </LinkContainer>
+              </Link>
             </Nav>
           </Navbar>
         </div>
@@ -62,5 +76,3 @@ function Navigation(functionLoading) {
     </div>
   );
 }
-
-export default Navigation;
