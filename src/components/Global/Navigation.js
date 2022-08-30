@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Nav, Navbar, OverlayTrigger,Tooltip } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import metadata from 'heroku-dyno-metadata';
 import logo from '../../assets/img/logo.svg';
 import ocLogo from '../../assets/img/oc-logo.png';
 import project from '../../../package.json';
 
 export default function Navigation() {
+	const metadata = require('heroku-dyno-metadata');
   const [gitHash, setGitHash ] = useState('githash');
 	const [buildDate, setBuildDate] = useState('builddate')
 
