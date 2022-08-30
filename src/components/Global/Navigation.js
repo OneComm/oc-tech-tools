@@ -23,19 +23,6 @@ export default function Navigation() {
             <Nav className="flex-column">
               <Navbar.Text as='h6' className='text-uppercase text-white'>Applications</Navbar.Text>
               <Link className='nav-link' to="/">Dashboard</Link>
-              <Link className='nav-link' to="/sow">
-                <OverlayTrigger
-                  key='sow'
-                  placement='right'
-                  overlay={
-                    <Tooltip>
-                      Tool for generating and working project scopes
-                    </Tooltip>
-                  }
-                >
-                  <p>SOW</p>
-                </OverlayTrigger>
-              </Link>
               <hr/>
               <Navbar.Text as='h6' className='text-uppercase text-white'>Utilities</Navbar.Text>
               <Link className='nav-link' to="/utils/opt43">
