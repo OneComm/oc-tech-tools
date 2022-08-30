@@ -14,7 +14,6 @@ export default function Navigation() {
     setBuildDate(process.env.HEROKU_RELEASE_CREATED_AT);
   }, []);
   
-  console.log(buildNum);
   return (
     <div className='d-flex flex-column vertical-nav text-white' id='sidebar'>
       <div className="py-4 px-3 mb-4">
