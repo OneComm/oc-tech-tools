@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Nav, Navbar, OverlayTrigger,Tooltip } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/img/logo.svg';
@@ -7,16 +7,7 @@ import project from '../../../package.json';
 
 export default function Navigation() {
   const [buildNum, setBuildNum] = useState(null);
-
-  useEffect(() => {
-    if (!process.env.REACT_APP_HEROKU_RELEASE_VERSION) {
-      setBuildNum(process.env.HEROKU_RELEASE_VERSION);
-    } else {
-      setBuildNum(process.env.REACT_APP_HEROKU_RELEASE_VERSION);
-    }
-  }, []);
-  
-  console.log(buildNum);
+  setBuildNum(process.env.REACT_APP_HEROKU_RELEASE_VERSION);
   return (
     <div className='d-flex flex-column vertical-nav text-white' id='sidebar'>
       <div className="py-4 px-3 mb-4">
@@ -68,7 +59,8 @@ export default function Navigation() {
       </div>
       <div className="fixed-bottom py-4 px-3 ">
         <img src={ocLogo} alt="" width={190} className="py-2" />{' '}
-        <p>{`Version ${project.version} Build ${buildNum}`} <br />
+        <p>{`Version ${project.version}`} <br />
+           {buildNum} <br />
         <a href='mailto:jgeorge@one-comm.com' style={{color:'white'}}>Submit Bugs</a></p>
       </div>
     </div>
