@@ -43,7 +43,7 @@ export default function Option43() {
     <div className='page-content p-3'>
       <Card>
         <Card.Body>
-          <Card.Title className='border-bottom'>Option 43 Generator</Card.Title>
+          <Card.Title className='border-bottom'>Option 43 Helper</Card.Title>
           <Row className="py-2 mb-3">
             <p>Input the IP address of the controller below and hit submit for option 43 formatted for windows and Sophos DHCP.</p>
           </Row>

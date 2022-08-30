@@ -52,7 +52,7 @@ export default function Opt128() {
     <div className="page-content p-3">
       <Card>
         <Card.Body>
-          <Card.Title className="border-bottom">DHCP Helper</Card.Title>
+          <Card.Title className="border-bottom">Option 128 Helper</Card.Title>
           <Form className="py-2" onSubmit={ handleSubmit }>
             <Row className="mb-3">
               <Form.Group as={ Col }>
