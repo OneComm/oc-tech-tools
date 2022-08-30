@@ -13,7 +13,8 @@ export default function Navigation() {
   useEffect(() => {
 		if (metadata.slugCommit) setGitHash(metadata.slugCommit);
 		if (metadata.releaseCreatedAt) setBuildDate(metadata.releaseCreatedAt);
-	}, []);
+		console.log(metadata);
+	}, [metadata]);
 
   return (
     <div className='d-flex flex-column vertical-nav text-white' id='sidebar'>
