@@ -6,14 +6,12 @@ import ocLogo from '../../assets/img/oc-logo.png';
 import project from '../../../package.json';
 
 export default function Navigation() {
-  const [buildNum, setBuildNum] = useState(null);
+  const [gitHash, setGitHash] = useState(null);
+  const [buildDate, setBuildDate] = useState(null);
 
   useEffect(() => {
-    if (!process.env.REACT_APP_HEROKU_RELEASE_VERSION) {
-      setBuildNum(process.env.HEROKU_RELEASE_VERSION);
-    } else {
-      setBuildNum(process.env.REACT_APP_HEROKU_RELEASE_VERSION);
-    }
+    setGitHash(process.env.HEROKU_SLUG_COMMIT);
+    setBuildDate(process.env.HEROKU_RELEASE_CREATED_AT);
   }, []);
   
   console.log(buildNum);
@@ -68,7 +66,9 @@ export default function Navigation() {
       </div>
       <div className="fixed-bottom py-4 px-3 ">
         <img src={ocLogo} alt="" width={190} className="py-2" />{' '}
-        <p>{`Version ${project.version} Build ${buildNum}`} <br />
+        <p>{`Version ${project.version}`} <br />
+           {gitHash} <br />
+           {buildDate} <br />
         <a href='mailto:jgeorge@one-comm.com' style={{color:'white'}}>Submit Bugs</a></p>
       </div>
     </div>
