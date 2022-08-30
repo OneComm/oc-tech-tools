@@ -1,14 +1,20 @@
 import React, { useState } from "react";
-import { Row, Col, Card, Button, Form, FloatingLabel} from 'react-bootstrap';
-import Data from "./Project/Data";
-import Mitel from "./Project/Mitel";
-import Ruckus from "./Project/Ruckus";
+import { Row, Col, Card, Button, Form, FloatingLabel, Tab, Nav} from 'react-bootstrap';
+import Data from "./Data";
+import Mitel from "./Mitel";
+import Ruckus from "./Ruckus";
 
 function Sow() {
 
-  const [data, setData] = useState();
-  const [mitel, setMitel] = useState();
-  const [ruckus, setRuckus] = useState();
+  const [data, setData] = useState(false);
+  const [mitel, setMitel] = useState(false);
+  const [ruckus, setRuckus] = useState(false);
+
+  const defaultKey = () => {
+    if (data) return 'data';
+    if (mitel) return 'mitel';
+    else return 'ruckus';
+  }
 
   return (
     <div className="page-content p-3">
@@ -83,16 +89,45 @@ function Sow() {
               </Form>
             </Card.Body>
           </Card>
-          <Data data={data} />
-          <Mitel mitel={mitel} />
-          <Ruckus ruckus={ruckus} />
+          { data | mitel | ruckus ?
+          <Card>
+            <Tab.Container id='sowtabs' defaultActiveKey={defaultKey}>
+              <Card.Header>
+                <Nav variant='tabs' justify>
+                  { data ?
+                  <Nav.Item>
+                    <Nav.Link eventKey='data'>Data Network</Nav.Link>
+                  </Nav.Item>
+                  : null }
+                  { mitel ?
+                  <Nav.Item>
+                    <Nav.Link eventKey='mitel'>Mitel Voice</Nav.Link>
+                  </Nav.Item>
+                  : null }
+                  { ruckus ?
+                  <Nav.Item>
+                    <Nav.Link eventKey='ruckus'>Ruckus Wifi</Nav.Link>
+                  </Nav.Item>
+                  : null }
+                </Nav>
+              </Card.Header>
+              <Card.Body>
+                <Tab.Content>
+                  <Tab.Pane eventKey='data'><Data /></Tab.Pane>
+                  <Tab.Pane eventKey='mitel'><Mitel /></Tab.Pane>
+                  <Tab.Pane eventKey='ruckus'><Ruckus /></Tab.Pane>
+                </Tab.Content>
+              </Card.Body>
+            </Tab.Container>
+          </Card>
+          : null }
         </Col>
         <Col xs lg="3">
           <Card>
             <Card.Header>Project Management</Card.Header>
             <Card.Body>
               <div id="project-controls" className="d-flex flex-column" style={{width: "50%"}}>
-                <Button className="p-2 mb-2">Save</Button>
+                <Button className="btn-primary p-2 mb-2">Save</Button>
                 <Button className="btn-secondary p-2">Cancel</Button>
               </div>
             </Card.Body>

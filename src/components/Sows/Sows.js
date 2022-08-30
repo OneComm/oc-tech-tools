@@ -8,6 +8,7 @@ function Sows() {
       <Row className="mb-3">
         <Col>
           <Card>
+          <Card.Header>Project Scopes</Card.Header>
             <Card.Body>
               <Table hover>
                 <thead>
@@ -23,7 +24,7 @@ function Sows() {
                   <LinkContainer 
                     to="/sow/1234" 
                     style={{cursor:'pointer'}}
-                    isActive={() => window.location.hash.indexOf('/sow') > -1}>
+                  >
                     <tr>
                       <td>Test Project</td>
                       <td>9987652</td>
@@ -35,7 +36,7 @@ function Sows() {
                   <LinkContainer 
                     to="/sow/1234" 
                     style={{cursor:'pointer'}}
-                    isActive={() => window.location.hash.indexOf('/sow') > -1}>
+                  >
                     <tr>
                       <td>Test Project</td>
                       <td>9987642</td>
@@ -47,7 +48,7 @@ function Sows() {
                   <LinkContainer 
                     to="/sow/1234" 
                     style={{cursor:'pointer'}}
-                    isActive={() => window.location.hash.indexOf('/sow') > -1}>
+                  >
                     <tr>
                       <td>Test Project</td>
                       <td>9987632</td>
