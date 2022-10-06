@@ -39,11 +39,9 @@ export default function App() {
             <Route exact path="/" element={ <Dashboard /> } />
             <Route path="/sow" element={ <Sows /> } />
             <Route path="/sow/:id" element={ <Sow /> } />
-            <Route path="/utils/domain" element={ <Domain /> } />
             <Route path="/utils/opt43" element={ <Option43 /> } />
             <Route path="/utils/opt125" element={ <Option125 /> } />
             <Route path="*" element={ <NotFound />} />
-            <Route path="/utils/hfr" element={ <ButtHurt /> } />
           </Routes>
         </Router>
       </AuthenticatedTemplate>
