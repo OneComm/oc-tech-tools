@@ -33,10 +33,34 @@ export default function Navigation() {
             <Nav className="flex-column">
               <Navbar.Text as='h6' className='text-uppercase text-white'>Applications</Navbar.Text>
               <Link className='nav-link' to="/">Dashboard</Link>
-              
+              <Link className='nav-link' to="/sow">
+                <OverlayTrigger
+                  key='sow'
+                  placement='right'
+                  overlay={
+                    <Tooltip>
+                      Tool for generating and working project scopes
+                    </Tooltip>
+                  }
+                >
+                  <p>SOW</p>
+                </OverlayTrigger>
+              </Link>
               <hr/>
               <Navbar.Text as='h6' className='text-uppercase text-white'>Utilities</Navbar.Text>
-              
+              <Link className='nav-link' to="/utils/domain">
+                <OverlayTrigger
+                  key='domain'
+                  placement='right'
+                  overlay={
+                    <Tooltip>
+                      Tool for pulling domain records such as MX and DNS
+                    </Tooltip>
+                  }
+                >
+                  <p>Domain Tools</p>
+                </OverlayTrigger>
+              </Link>
               <Link className='nav-link' to="/utils/opt43">
                 <OverlayTrigger
                   key='opt43'
@@ -50,7 +74,7 @@ export default function Navigation() {
                   <p>Option 43 Helper</p>
                 </OverlayTrigger>
               </Link>
-              <Link className='nav-link' to="/utils/opt125">
+              <Link className='nav-link' to="/utils/opt128">
                 <OverlayTrigger
                   key='opt125'
                   placement='right'
