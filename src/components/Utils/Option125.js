@@ -2,7 +2,7 @@ import React from "react";
 import { GenerateHex } from "../../api/dhcp";
 import { Row, Col, Form, FloatingLabel, Button, Collapse, Card } from 'react-bootstrap';
 
-export default function Opt128() {
+export default function Opt125() {
 
   const initialFormData = Object.freeze({
     id: "ipphone.mitel.com",
@@ -52,7 +52,7 @@ export default function Opt128() {
     <div className="page-content p-3">
       <Card>
         <Card.Body>
-          <Card.Title className="border-bottom">Option 128 Helper</Card.Title>
+          <Card.Title className="border-bottom">Option 125 Helper</Card.Title>
           <Form className="py-2" onSubmit={ handleSubmit }>
             <Row className="mb-3">
               <Form.Group as={ Col }>

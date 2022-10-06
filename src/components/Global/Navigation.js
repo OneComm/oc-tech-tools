@@ -33,8 +33,10 @@ export default function Navigation() {
             <Nav className="flex-column">
               <Navbar.Text as='h6' className='text-uppercase text-white'>Applications</Navbar.Text>
               <Link className='nav-link' to="/">Dashboard</Link>
+              
               <hr/>
               <Navbar.Text as='h6' className='text-uppercase text-white'>Utilities</Navbar.Text>
+              
               <Link className='nav-link' to="/utils/opt43">
                 <OverlayTrigger
                   key='opt43'
@@ -48,17 +50,17 @@ export default function Navigation() {
                   <p>Option 43 Helper</p>
                 </OverlayTrigger>
               </Link>
-              <Link className='nav-link' to="/utils/opt128">
+              <Link className='nav-link' to="/utils/opt125">
                 <OverlayTrigger
-                  key='opt128'
+                  key='opt125'
                   placement='right'
                   overlay={
                     <Tooltip>
-                      Tool for generating option 128 hex strings
+                      Tool for generating option 125 hex strings
                     </Tooltip>
                   }
                 >
-                  <p>Option 128 Helper</p>
+                  <p>Option 125 Helper</p>
                 </OverlayTrigger>
               </Link>
             </Nav>
