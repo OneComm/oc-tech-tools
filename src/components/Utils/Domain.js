@@ -1,5 +1,5 @@
 import React from 'react';
-import { LookupDomain } from '../../api/mxtoolbox';
+import { LookupDNS } from '../../api/whoisxmlapi';
 import { Container, Row, Col, Form, Button, Collapse, Card } from 'react-bootstrap';
 
 export default function Domain() {
@@ -9,12 +9,11 @@ export default function Domain() {
   });
 
   const initialDomainData = Object.freeze({
-    dns: {},
-    mx: {}
+    dns: {}
   });
 
   const [formData, updateFormData] = React.useState(initialFormData);
-  const [hexData, updateDomainData] = React.useState(initialDomainData);
+  const [domainData, updateDomainData] = React.useState(initialDomainData);
   const [open, setOpen] = React.useState(false);
 
   const handleChange = (e) => {
@@ -28,10 +27,9 @@ export default function Domain() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    var result = LookupDomain(formData.domain);
+    var result = LookupDNS(formData.domain);
     updateDomainData({
-      dns: result.dns,
-      mx: result.mx
+      dns: result.dnsRecords
     });
     setOpen(true);
   };
@@ -60,19 +58,19 @@ export default function Domain() {
               <Row className="mb-2">
                 <Col><b>IP Address</b></Col>
                 <Col>
-                <Form.Control type="text" disabled value={ hexData.ip } />
+                <Form.Control type="text" disabled value={ domainData.ip } />
                 </Col>
                 <Col></Col>
               </Row>
               <Row className="mb-2">
                 <Col><b>Hex String</b></Col>
                 <Col>
-                  <Form.Control type="text" disabled value={ hexData.unformatted } />
+                  <Form.Control type="text" disabled value={ domainData.unformatted } />
                 </Col>
                 <Col>
                   <Button
                     
-                    onClick={ () => navigator.clipboard.writeText(hexData.unformatted) }
+                    onClick={ () => navigator.clipboard.writeText(domainData.unformatted) }
                   >
                     Copy
                   </Button>
@@ -81,12 +79,12 @@ export default function Domain() {
               <Row className="mb-2">
                 <Col><b>Sophos Option</b></Col>
                 <Col>
-                  <Form.Control type="text" disabled value={ hexData.formatted } />
+                  <Form.Control type="text" disabled value={ domainData.formatted } />
                 </Col>
                 <Col>
                   <Button
                     
-                    onClick={ () => navigator.clipboard.writeText(hexData.formatted) }
+                    onClick={ () => navigator.clipboard.writeText(domainData.formatted) }
                   >
                     Copy
                   </Button>
