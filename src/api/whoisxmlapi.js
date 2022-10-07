@@ -8,7 +8,13 @@ export async function LookupDNS(domain) {
     baseURL: "https://www.whoisxmlapi.com/whoisserver"
   });
 
-  api.get(`/DNSService?apiKey=${apiKey}&domainName=${domainName}&type=_all&outputFormat=json`)
+  const options = {
+    Headers: {
+      "Content-Type": "text/json"
+    }
+  }
+
+  api.get(`/DNSService?apiKey=${apiKey}&domainName=${domainName}&type=_all&outputFormat=json`, options)
     .then(response => {
       console.log(response.data);
       return response.data;
