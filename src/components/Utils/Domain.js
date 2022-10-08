@@ -30,7 +30,6 @@ export default function Domain() {
       const record = dns[i];
       updateDnsData(dnsData => [...dnsData, record]);
     }
-    updateBlacklistsData(blacklistsResult);
     setOpen(true);
   };
 
