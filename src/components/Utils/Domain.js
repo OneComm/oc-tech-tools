@@ -1,19 +1,19 @@
 import React from 'react';
+import Loading from '../Global/Loading';
 import { LookupDNS } from '../../api/whoisxmlapi';
-import { Container, Row, Col, Form, Button, Collapse, Card } from 'react-bootstrap';
+import { LookupBlacklists } from '../../api/hetrix';
+import { Container, Row, Col, Form, Button, Collapse, Table, Card } from 'react-bootstrap';
+
 
 export default function Domain() {
-
   const initialFormData = Object.freeze({
     domain: ""
   });
-
-  const initialDomainData = Object.freeze({
-    dns: {}
-  });
-
+  const initialDnsData = [];
+  const initialBlacklistsData = {};
   const [formData, updateFormData] = React.useState(initialFormData);
-  const [domainData, updateDomainData] = React.useState(initialDomainData);
+  const [dnsData, updateDnsData] = React.useState(initialDnsData);
+  const [blacklistsData, updateBlacklistsData] = React.useState(initialBlacklistsData);
   const [open, setOpen] = React.useState(false);
 
   const handleChange = (e) => {
@@ -25,15 +25,21 @@ export default function Domain() {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    var result = LookupDNS(formData.domain);
-    updateDomainData({
-      dns: result.dnsRecords
-    });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    updateDnsData(initialDnsData);
+    const dnsResult = await LookupDNS(formData.domain);
+    const blacklistsResult = await LookupBlacklists(formData.domain);
+    const dns = dnsResult.data.DNSData.dnsRecords;
+    for (let i = 0; i < dns.length; i++) {
+      const record = dns[i];
+      updateDnsData(dnsData => [...dnsData, record]);
+    }
+    updateBlacklistsData(blacklistsResult);
     setOpen(true);
   };
 
+  
   return (
     <div className='page-content p-3'>
       <Card>
@@ -55,39 +61,114 @@ export default function Domain() {
           </Form>
           <Collapse in={ open }>
             <Container>
-              <Row className="mb-2">
-                <Col><b>IP Address</b></Col>
+              <Row>
                 <Col>
-                <Form.Control type="text" disabled value={ domainData.ip } />
+                  <strong>A Records</strong>
+                  <Table striped bordered size='sm'>
+                    <thead>
+                      <tr>
+                        <th>Type</th>
+                        <th>Domain Name</th>
+                        <th>TTL</th>
+                        <th>Record</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {dnsData.map((record, index) => {
+                        if (record.type === 1)
+                        return (
+                        <tr key={index}>
+                          <td>{record.dnsType}</td>
+                          <td>{record.name}</td>
+                          <td>{record.ttl}</td>
+                          <td>{record.address}</td>
+                        </tr>
+                        )
+                      })}
+                    </tbody>
+                  </Table>
+                  <hr />
+                  <strong>AAAA Records</strong>
+                  <Table striped bordered size='sm'>
+                    <thead>
+                      <tr>
+                        <th>Type</th>
+                        <th>Domain Name</th>
+                        <th>TTL</th>
+                        <th>Record</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {dnsData.map((record, index) => {
+                        if (record.type === 28)
+                        return (
+                        <tr key={index}>
+                          <td>{record.dnsType}</td>
+                          <td>{record.name}</td>
+                          <td>{record.ttl}</td>
+                          <td>{record.address}</td>
+                        </tr>
+                        )
+                      })}
+                    </tbody>
+                  </Table>
+                  <hr />
+                  <strong>MX Records</strong>
+                  <Table striped bordered size='sm'>
+                    <thead>
+                      <tr>
+                        <th>Type</th>
+                        <th>Domain Name</th>
+                        <th>TTL</th>
+                        <th>Priority</th>
+                        <th>Target</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {dnsData.map((record, index) => {
+                        if (record.type === 15)
+                        return (
+                        <tr key={index}>
+                          <td>{record.dnsType}</td>
+                          <td>{record.name}</td>
+                          <td>{record.ttl}</td>
+                          <td>{record.priority}</td>
+                          <td>{record.target}</td>
+                        </tr>
+                        )
+                      })}
+                    </tbody>
+                  </Table>
+                  <hr />
+                  <strong>Text Records</strong>
+                  <Table striped bordered size='sm'>
+                    <thead>
+                      <tr>
+                        <th>Type</th>
+                        <th>Domain Name</th>
+                        <th>TTL</th>
+                        <th>Record</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {dnsData.map((record, index) => {
+                        if (record.type === 16)
+                        return (
+                        <tr key={index}>
+                          <td>{record.dnsType}</td>
+                          <td>{record.name}</td>
+                          <td>{record.ttl}</td>
+                          <td>{record.strings[0]}</td>
+                        </tr>
+                        )
+                      })}
+                    </tbody>
+                  </Table>
                 </Col>
-                <Col></Col>
-              </Row>
-              <Row className="mb-2">
-                <Col><b>Hex String</b></Col>
                 <Col>
-                  <Form.Control type="text" disabled value={ domainData.unformatted } />
-                </Col>
-                <Col>
-                  <Button
-                    
-                    onClick={ () => navigator.clipboard.writeText(domainData.unformatted) }
-                  >
-                    Copy
-                  </Button>
-                </Col>
-              </Row>
-              <Row className="mb-2">
-                <Col><b>Sophos Option</b></Col>
-                <Col>
-                  <Form.Control type="text" disabled value={ domainData.formatted } />
-                </Col>
-                <Col>
-                  <Button
-                    
-                    onClick={ () => navigator.clipboard.writeText(domainData.formatted) }
-                  >
-                    Copy
-                  </Button>
+                  <strong>Blacklist Check</strong>
+                  <Loading />
+                  {blacklistsData.status}
                 </Col>
               </Row>
             </Container>
