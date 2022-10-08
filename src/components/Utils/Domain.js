@@ -1,7 +1,5 @@
 import React from 'react';
-import Loading from '../Global/Loading';
 import { LookupDNS } from '../../api/whoisxmlapi';
-import { LookupBlacklists } from '../../api/hetrix';
 import { Container, Row, Col, Form, Button, Collapse, Table, Card } from 'react-bootstrap';
 
 
@@ -10,10 +8,8 @@ export default function Domain() {
     domain: ""
   });
   const initialDnsData = [];
-  const initialBlacklistsData = {};
   const [formData, updateFormData] = React.useState(initialFormData);
   const [dnsData, updateDnsData] = React.useState(initialDnsData);
-  const [blacklistsData, updateBlacklistsData] = React.useState(initialBlacklistsData);
   const [open, setOpen] = React.useState(false);
 
   const handleChange = (e) => {
@@ -29,7 +25,6 @@ export default function Domain() {
     e.preventDefault();
     updateDnsData(initialDnsData);
     const dnsResult = await LookupDNS(formData.domain);
-    const blacklistsResult = await LookupBlacklists(formData.domain);
     const dns = dnsResult.data.DNSData.dnsRecords;
     for (let i = 0; i < dns.length; i++) {
       const record = dns[i];
@@ -164,11 +159,6 @@ export default function Domain() {
                       })}
                     </tbody>
                   </Table>
-                </Col>
-                <Col>
-                  <strong>Blacklist Check</strong>
-                  <Loading />
-                  {blacklistsData.status}
                 </Col>
               </Row>
             </Container>
