@@ -36,7 +36,19 @@ export default function Navigation() {
               
               <hr/>
               <Navbar.Text as='h6' className='text-uppercase text-white'>Utilities</Navbar.Text>
-              
+              <Link className='nav-link' to="/utils/domain">
+                <OverlayTrigger
+                  key='domain'
+                  placement='right'
+                  overlay={
+                    <Tooltip>
+                      Tool for looking up DNS records on a domain
+                    </Tooltip>
+                  }
+                >
+                  <p>Domain Tool</p>
+                </OverlayTrigger>
+              </Link>
               <Link className='nav-link' to="/utils/opt43">
                 <OverlayTrigger
                   key='opt43'
