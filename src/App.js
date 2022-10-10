@@ -30,7 +30,9 @@ function GetHeader() {
 
 export default function App() {
   if (isMobile) {
-    <MobileError />
+    return (
+      <MobileError />
+    );
   } else {
     return (
       <>
