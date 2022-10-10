@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/img/logo.svg';
 import ocLogo from '../../assets/img/oc-logo.png';
 import project from '../../../package.json';
-import metadata from 'heroku-dyno-metadata';
 
 export default function Navigation() {
   const [gitHash, setGitHash ] = useState('githash');
@@ -13,7 +12,6 @@ export default function Navigation() {
   useEffect(() => {
 		if (process.env.REACT_APP_SLUG_DESCRIPTION) setGitHash(process.env.REACT_APP_SLUG_DESCRIPTION);
 		if (process.env.REACT_APP_RELEASE_CREATED_AT) setBuildDate(process.env.REACT_APP_RELEASE_CREATED_AT);
-		console.log(metadata);
 	}, []);
 
   return (
