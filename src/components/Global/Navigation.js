@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/img/logo.svg';
 import ocLogo from '../../assets/img/oc-logo.png';
 import project from '../../../package.json';
+import { metadata } from 'heroku-dyno-metadata';
 
 export default function Navigation() {
 	const metadata = require('heroku-dyno-metadata');
@@ -83,9 +84,9 @@ export default function Navigation() {
         <img src={ocLogo} alt="" width={190} className="py-2" />{' '}
         <small>
         <p>{`Version ${project.version}`} <br />
-				   {gitHash} <br />
-					 {buildDate} <br />
-        <a href='mailto:jgeorge@one-comm.com' style={{color:'white'}}>Submit Bugs</a></p>
+				   {metadata.slugCommit} <br />
+					 {metadata.releaseCreatedAt} <br />
+        <a href='mailto:techtoolsbugreport@fire.fundersclub.com' style={{color:'white'}}>Submit Bugs</a></p>
         </small>
       </div>
     </div>
