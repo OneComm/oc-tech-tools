@@ -4,16 +4,16 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/img/logo.svg';
 import ocLogo from '../../assets/img/oc-logo.png';
 import project from '../../../package.json';
-import { metadata as heroku } from 'heroku-dyno-metadata';
+import metadata from 'heroku-dyno-metadata';
 
 export default function Navigation() {
   const [gitHash, setGitHash ] = useState('githash');
 	const [buildDate, setBuildDate] = useState('builddate')
 
   useEffect(() => {
-		if (heroku.slugCommit) setGitHash(heroku.slugCommit);
-		if (heroku.releaseCreatedAt) setBuildDate(heroku.releaseCreatedAt);
-		console.log(heroku);
+		if (metadata.slugCommit) setGitHash(metadata.slugCommit);
+		if (metadata.releaseCreatedAt) setBuildDate(metadata.releaseCreatedAt);
+		console.log(metadata);
 	}, []);
 
   return (
