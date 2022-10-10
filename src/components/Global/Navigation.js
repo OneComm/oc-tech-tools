@@ -11,8 +11,8 @@ export default function Navigation() {
 	const [buildDate, setBuildDate] = useState('builddate')
 
   useEffect(() => {
-		if (metadata.slugCommit) setGitHash(metadata.slugCommit);
-		if (metadata.releaseCreatedAt) setBuildDate(metadata.releaseCreatedAt);
+		if (process.env.REACT_APP_HEROKU_SLUG_DESCRIPTION) setGitHash(process.env.REACT_APP_HEROKU_SLUG_DESCRIPTION);
+		if (process.env.REACT_APP_HEROKU_RELEASE_CREATED_AT) setBuildDate(process.env.REACT_APP_HEROKU_RELEASE_CREATED_AT);
 		console.log(metadata);
 	}, []);
 

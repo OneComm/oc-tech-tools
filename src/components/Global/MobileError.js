@@ -14,7 +14,7 @@ export default function MobileError() {
             height="30"
             className="d-inline-block align-top"
           />
-          404 Not Found
+          Mobile Error
         </Card.Header>
         <Card.Body>
           <p>This application is not designed for mobile.</p>
