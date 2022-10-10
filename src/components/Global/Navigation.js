@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import env from 'react-dotenv';
 import { Nav, Navbar, OverlayTrigger,Tooltip } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/img/logo.svg';
@@ -12,8 +11,8 @@ export default function Navigation() {
 	const [buildDate, setBuildDate] = useState('builddate')
 
   useEffect(() => {
-		if (env.HEROKU_SLUG_DESCRIPTION) setGitHash(env.HEROKU_SLUG_DESCRIPTION);
-		if (env.HEROKU_RELEASE_CREATED_AT) setBuildDate(env.HEROKU_RELEASE_CREATED_AT);
+		if (process.env.REACT_APP_SLUG_DESCRIPTION) setGitHash(process.env.REACT_APP_SLUG_DESCRIPTION);
+		if (process.env.REACT_APP_RELEASE_CREATED_AT) setBuildDate(process.env.REACT_APP_RELEASE_CREATED_AT);
 		console.log(metadata);
 	}, []);
 
