@@ -28,7 +28,7 @@ export default function Navigation() {
           </div>
         </Link>
         <hr />
-        <div className='p-4'>
+        <div>
           <Navbar variant='dark'>
             <Nav className="flex-column">
               <Navbar.Text as='h6' className='text-uppercase text-white'>Applications</Navbar.Text>
@@ -80,13 +80,13 @@ export default function Navigation() {
         </div>
       </div>
       <div className="fixed-bottom py-4 px-3 ">
-        <img src={ocLogo} alt="" width={190} className="py-2" />{' '}
         <small>
-        <p>{`Version ${project.version}`} <br />
-				   {gitHash} <br />
-					 {buildDate} <br />
-        <a href='mailto:techtoolsbugreport@fire.fundersclub.com' style={{color:'white'}}>Submit Bugs</a></p>
+          <p>{`Version ${project.version}`} <br />
+            {gitHash} <br />
+            {buildDate} <br />
+          <a href='mailto:techtoolsbugreport@fire.fundersclub.com' style={{color:'white'}}>Submit Bugs</a></p>
         </small>
+        <img src={ocLogo} alt="" width={75} className="py-2" />{' '}
       </div>
     </div>
   );
