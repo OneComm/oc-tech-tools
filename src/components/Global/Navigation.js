@@ -4,18 +4,17 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/img/logo.svg';
 import ocLogo from '../../assets/img/oc-logo.png';
 import project from '../../../package.json';
-import { metadata } from 'heroku-dyno-metadata';
+import { metadata as heroku } from 'heroku-dyno-metadata';
 
 export default function Navigation() {
-	const metadata = require('heroku-dyno-metadata');
   const [gitHash, setGitHash ] = useState('githash');
 	const [buildDate, setBuildDate] = useState('builddate')
 
   useEffect(() => {
-		if (metadata.slugCommit) setGitHash(metadata.slugCommit);
-		if (metadata.releaseCreatedAt) setBuildDate(metadata.releaseCreatedAt);
-		console.log(metadata);
-	}, [metadata]);
+		if (heroku.slugCommit) setGitHash(heroku.slugCommit);
+		if (heroku.releaseCreatedAt) setBuildDate(heroku.releaseCreatedAt);
+		console.log(heroku);
+	}, []);
 
   return (
     <div className='d-flex flex-column vertical-nav text-white' id='sidebar'>
@@ -84,8 +83,8 @@ export default function Navigation() {
         <img src={ocLogo} alt="" width={190} className="py-2" />{' '}
         <small>
         <p>{`Version ${project.version}`} <br />
-				   {metadata.slugCommit} <br />
-					 {metadata.releaseCreatedAt} <br />
+				   {gitHash} <br />
+					 {buildDate} <br />
         <a href='mailto:techtoolsbugreport@fire.fundersclub.com' style={{color:'white'}}>Submit Bugs</a></p>
         </small>
       </div>
