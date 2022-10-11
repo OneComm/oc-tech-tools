@@ -10,8 +10,9 @@ function Dashboard() {
             <Card>
               <Card.Body>
               <Card.Title className="border-bottom py-1">Recent news</Card.Title>
-              <p>This is a growing set of utilities to assist with daily operations. Functionality is currently in development, but the DCHP Option Helper and the Option 43 Generator are ready to go.</p>
+              <p>This is a growing set of utilities to assist with daily operations. Functionality is currently in development, but a few utilities are available for use.</p>
               </Card.Body>
+              <Card.Footer><small><strong>Updated:</strong> Oct 11, 2022</small></Card.Footer>
             </Card>
           </Col>
           <Col>
