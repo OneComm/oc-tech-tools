@@ -40,7 +40,7 @@ export default function Navigation() {
                   placement='right'
                   overlay={
                     <Tooltip>
-                      Tool for looking up DNS records on a domain
+                      Tool for looking up domain information
                     </Tooltip>
                   }
                 >
