@@ -10,6 +10,8 @@ import Header from './components/Global/Header';
 import Navigation from './components/Global/Navigation';
 import Dashboard from './components/Dashboard';
 import Domain from './components/Utils/Domain';
+import Email from './components/Utils/Email';
+import TimeLogs from './components/Utils/TimeLogs';
 import Option43 from './components/Utils/Option43';
 import Option125 from './components/Utils/Option125';
 import NotFound from './components/Global/NotFound';
@@ -43,6 +45,8 @@ export default function App() {
             <Routes>
               <Route exact path="/" element={ <Dashboard /> } />
               <Route path="/utils/domain" element={ <Domain /> } />
+              <Route path="/utils/email" element={ <Email /> } />
+              <Route path="/utils/timelogs" element={ <TimeLogs /> } />
               <Route path="/utils/opt43" element={ <Option43 /> } />
               <Route path="/utils/opt125" element={ <Option125 /> } />
               <Route path="*" element={ <NotFound />} />

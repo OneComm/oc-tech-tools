@@ -47,6 +47,19 @@ export default function Navigation() {
                   <p>Domain Tool</p>
                 </OverlayTrigger>
               </Link>
+              <Link className='nav-link' to="/utils/timelogs">
+                <OverlayTrigger
+                  key='domain'
+                  placement='right'
+                  overlay={
+                    <Tooltip>
+                      Tool for generating time logs from Teamwork Desk
+                    </Tooltip>
+                  }
+                >
+                  <p>Timelog Tool</p>
+                </OverlayTrigger>
+              </Link>
               <Link className='nav-link' to="/utils/opt43">
                 <OverlayTrigger
                   key='opt43'
