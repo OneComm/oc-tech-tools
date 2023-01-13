@@ -27,7 +27,7 @@ export default function TimeLogs() {
     .catch(error => console.error(error));
   }, [])
 
-  console.log(companies.current);
+  // console.log(companies.current);
 
   return (
     <div className='page-content p-3'>
