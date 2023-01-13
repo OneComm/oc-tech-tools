@@ -1,29 +1,33 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { GetCompanies } from '../../api/teamwork';
 import { Row, Col, Button, Card, Form } from 'react-bootstrap';
 import Select from 'react-select';
 import DateRangePicker from 'react-bootstrap-daterangepicker';
 import 'bootstrap-daterangepicker/daterangepicker.css';
+import Loading from '../Global/Loading';
+import { CombineArray } from '../../api/combineArray';
 
 export default function TimeLogs() {
-  const [companyData, updateCompanyData] = useState([])
-  const [isLoading, setIsLoading] = useState(false);
-
-  let companies = [];
+  const [isLoading, setIsLoading] = useState(true);
+  const companies = useRef([]);
+  const joinedArray = useRef([]);
 
   useEffect(() => {
     GetCompanies()
-    .then(result => updateCompanyData(result.data))
+    .then(result => {
+      joinedArray.current = [];
+      joinedArray.current = CombineArray(result);
+      for (let i = 0; i < joinedArray.current.length; i++) {
+        const company = joinedArray.current[i];
+        companies.current.push({value: company.id, label: company.name});
+      }
+      setIsLoading(false);
+    })
     .catch(error => console.error(error));
-  }, []);
+  }, [])
 
-  for (let i = 0; i < companyData.length; i++) {
-    const company = companyData[i];
-    const companyId = company.id;
-    const companyName = company.name;
-    companies = [...companies, {value: companyId, label: companyName}]
-  }
+  console.log(companies.current);
 
   return (
     <div className='page-content p-3'>
@@ -33,6 +37,9 @@ export default function TimeLogs() {
           <Row className="py-2 mb-3">
             <p>Pulls time logs from Teamwork Desk. Select your company (or none for all), date range, and choose whether or not to see open tickets.</p>
           </Row>
+          {isLoading ?
+          <Row><Loading /></Row>
+          :
           <Form as={Row}>
             <Col>
               <Form.Group>
@@ -40,7 +47,7 @@ export default function TimeLogs() {
                 <Select 
                   isMulti
                   name="customer"
-                  options={companies}
+                  options={companies.current}
                 />
               </Form.Group>
             </Col>
@@ -69,6 +76,7 @@ export default function TimeLogs() {
               </Form.Group>
             </Col>
           </Form>
+          }
         </Card.Body>
       </Card>
     </div>
