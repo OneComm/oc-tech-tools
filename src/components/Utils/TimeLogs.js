@@ -3,13 +3,26 @@ import { useState, useEffect, useRef } from 'react';
 import { GetCompanies } from '../../api/teamwork';
 import { Row, Col, Button, Card, Form } from 'react-bootstrap';
 import Select from 'react-select';
-import DateRangePicker from 'react-bootstrap-daterangepicker';
-import 'bootstrap-daterangepicker/daterangepicker.css';
+import { DefinedRange } from 'react-date-range';
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
 import Loading from '../Global/Loading';
 import { CombineArray } from '../../api/combineArray';
 
 export default function TimeLogs() {
+  const initialFormData = Object.freeze({
+    showClosed: null
+  });
   const [isLoading, setIsLoading] = useState(true);
+  const [formData, updateFormData] = useState(initialFormData);
+  const [selectedOption, setSelectedOption] = useState([]);
+  const [dateRange, setDateRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: null,
+      key: 'selection'
+    }
+  ]);
   const companies = useRef([]);
   const joinedArray = useRef([]);
 
@@ -25,9 +38,26 @@ export default function TimeLogs() {
       setIsLoading(false);
     })
     .catch(error => console.error(error));
-  }, [])
+  }, []);
 
-  // console.log(companies.current);
+  const handleChange = (e) => {
+    updateFormData({
+      ...formData,
+
+      // Trimming any whitespace
+      [e.target.name]: e.target.value.trim()
+    })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    
+
+    console.log(selectedOption);
+    console.log(dateRange);
+    console.log(formData);
+  }
 
   return (
     <div className='page-content p-3'>
@@ -40,42 +70,69 @@ export default function TimeLogs() {
           {isLoading ?
           <Row><Loading /></Row>
           :
-          <Form as={Row}>
-            <Col>
-              <Form.Group>
-                <Form.Label>Customer</Form.Label>
-                <Select 
-                  isMulti
-                  name="customer"
-                  options={companies.current}
-                />
-              </Form.Group>
+          <Row>
+            <Col as={Card} xs={3}>
+              <Card.Body>
+                <Card.Title className='border-bottom'>Parameters</Card.Title>
+                <Form>
+                  <Form.Group>
+                  <Form.Label>Customer</Form.Label>
+                  <Select 
+                    isSearchable
+                    isClearable
+                    name="company"
+                    options={companies.current}
+                    onChange={setSelectedOption}
+                  />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Date Range</Form.Label>
+                    <DefinedRange
+                      onChange={item => setDateRange([item.selection])}
+                      ranges={dateRange}
+                    />
+                  </Form.Group>
+                  <Form.Group>
+                  <Form.Label>  </Form.Label>
+                  <Form.Check 
+                    type="switch"
+                    id="open tickets"
+                    label="Show closed tickets"
+                    name="showClosed"
+                    onChange={handleChange}
+                  />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>   </Form.Label>
+                    <Button onClick={handleSubmit}>Submit</Button>
+                  </Form.Group>
+                </Form>
+              </Card.Body>
             </Col>
             <Col>
-              <Form.Group>
-                <Form.Label>Date Range</Form.Label>
-                <DateRangePicker>
-                  <input type="text" className="form-control col-4" />
-                </DateRangePicker>
-              </Form.Group>
+              <Card.Body>
+                <Card.Title className='border-bottom'>Results</Card.Title>
+                <Row className="mb-2">
+                  <span>
+                    Ticket ID: 134588 Agent: Jonathan George Date: 1/13/23 Time: 1hr 30min<br />
+                    Timelog description...
+                  </span>
+                </Row>
+                <Row className="mb-2">
+                  <span>
+                    Ticket ID: 472891 Agent: John Bell Date: 1/11/23 Time: 30min<br />
+                    Timelog description...
+                  </span>
+                </Row>
+                <Row className="mb-2">
+                  <span>
+                    Ticket ID: 184628 Agent: Wes Marques Date: 1/10/23 Time: 1hr<br />
+                    Timelog description...
+                  </span>
+                </Row>
+              </Card.Body>
             </Col>
-            <Col>
-            <Form.Group>
-              <Form.Label>  </Form.Label>
-              <Form.Check 
-                type="switch"
-                id="open tickets"
-                label="Show open tickets"
-              />
-            </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group>
-                <Form.Label>   </Form.Label>
-                <Button>Submit</Button>
-              </Form.Group>
-            </Col>
-          </Form>
+          </Row>
           }
         </Card.Body>
       </Card>
