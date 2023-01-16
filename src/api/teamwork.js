@@ -1,5 +1,16 @@
 import axios from 'axios';
 
+function GetAgents() {
+  const baseURL = "https://oc-tech-tools-api.herokuapp.com";
+
+  const teamworkApi = axios.create({
+    baseURL
+  });
+  
+  const agents = teamworkApi.get('/teamwork/agents');
+  return agents;
+}
+
 function GetCompanies() {
   const baseURL = "https://oc-tech-tools-api.herokuapp.com";
 
@@ -29,4 +40,4 @@ function GetTimelogs(company, dateRange, showClosed) {
   return timelogs;
 }
 
-export {GetCompanies, GetTimelogs};
+export {GetAgents, GetCompanies, GetTimelogs};
