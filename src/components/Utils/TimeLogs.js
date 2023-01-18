@@ -30,6 +30,7 @@ export default function TimeLogs() {
   }, []);
 
   const handleExportSubmit = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
 
     const { data } = await GetTimelogs();
@@ -39,6 +40,7 @@ export default function TimeLogs() {
     })
     console.log(timelogsRef.current);
     setTimelogs(timelogsRef.current);
+    setIsLoading(false);
   }
 
   return (
