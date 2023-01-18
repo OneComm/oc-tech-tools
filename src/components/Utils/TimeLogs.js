@@ -12,7 +12,8 @@ export default function TimeLogs() {
   const [isLoading, setIsLoading] = useState(true);
   const companies = useRef([]);
   const joinedArray = useRef([]);
-  const timelogs = useRef([]);
+  const timelogsRef = useRef([]);
+  const [timelogs, setTimelogs] = useState([]);
 
   useEffect(() => {
     GetCompanies()
@@ -32,8 +33,9 @@ export default function TimeLogs() {
     e.preventDefault();
 
     const { data } = await GetTimelogs();
-    timelogs.current = data[0].timelogs;
-    console.log(timelogs.current);
+    timelogsRef.current = data[0].timelogs;
+    console.log(timelogsRef.current);
+    setTimelogs(timelogsRef.current);
   }
 
   return (
@@ -82,27 +84,27 @@ export default function TimeLogs() {
               </Col>
               <Col>
                 <Card.Body>
-                  <Card.Title className='border-bottom'>Results ({timelogs.current.length})</Card.Title>
+                  <Card.Title className='border-bottom'>Results ({timelogs.length})</Card.Title>
                   
                       <Table striped>
                         <tbody>
-                        {timelogs.current.map(timelog => {
+                        {timelogs.map(timelog => {
                           let ticketUrl = `https://onecomm.teamwork.com/desk/tickets/${timelog.ticket.id}/messages`;
                           var measuredTime = new Date(null);
                           measuredTime.setSeconds(timelog.seconds); // specify value of SECONDS
                           var MHSTime = measuredTime.toISOString().substr(11, 8);
                           return (
                             <tr>
-                            <Row className="mb-2">
-                              <Row>
-                                <Col>Ticket ID: <a href={ticketUrl} target='_blank' rel='noreferrer'>{timelog.ticket.id}</a></Col>
-                                <Col>Date: {moment(timelog.date).format('MM/DD/YYYY')}</Col>
-                                <Col>Time: {MHSTime}</Col>
+                              <Row className="mb-2">
+                                <Row>
+                                  <Col>Ticket ID: <a href={ticketUrl} target='_blank' rel='noreferrer'>{timelog.ticket.id}</a></Col>
+                                  <Col>Date: {moment(timelog.date).format('MM/DD/YYYY')}</Col>
+                                  <Col>Time: {MHSTime}</Col>
+                                </Row>
+                                <Row>
+                                  <Col>{timelog.description}</Col>
+                                </Row>
                               </Row>
-                              <Row>
-                                <Col>{timelog.description}</Col>
-                              </Row>
-                            </Row>
                             </tr>
                           )})}
                         </tbody>
