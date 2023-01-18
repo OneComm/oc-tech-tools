@@ -1,30 +1,18 @@
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
-import { GetCompanies } from '../../api/teamwork';
-import { Row, Col, Button, Card, Nav, Tabs, Tab, Form } from 'react-bootstrap';
-import Select from 'react-select';
-import { DefinedRange } from 'react-date-range';
+import { GetCompanies, GetTimelogs } from '../../api/teamwork';
+import { Row, Col, Button, Card, Tabs, Tab, Form, Table } from 'react-bootstrap';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import Loading from '../Global/Loading';
 import { CombineArray } from '../../api/combineArray';
+import moment from 'moment';
 
 export default function TimeLogs() {
-  const initialFormData = Object.freeze({
-    showClosed: null
-  });
   const [isLoading, setIsLoading] = useState(true);
-  const [formData, updateFormData] = useState(initialFormData);
-  const [selectedOption, setSelectedOption] = useState([]);
-  const [dateRange, setDateRange] = useState([
-    {
-      startDate: new Date(),
-      endDate: null,
-      key: 'selection'
-    }
-  ]);
   const companies = useRef([]);
   const joinedArray = useRef([]);
+  const timelogs = useRef([]);
 
   useEffect(() => {
     GetCompanies()
@@ -40,23 +28,12 @@ export default function TimeLogs() {
     .catch(error => console.error(error));
   }, []);
 
-  const handleExportChange = (e) => {
-    updateFormData({
-      ...formData,
-
-      // Trimming any whitespace
-      [e.target.name]: e.target.value.trim()
-    })
-  }
-
   const handleExportSubmit = async (e) => {
     e.preventDefault();
 
-    
-
-    console.log(selectedOption);
-    console.log(dateRange);
-    console.log(formData);
+    const { data } = await GetTimelogs();
+    timelogs.current = data[0].timelogs;
+    console.log(timelogs.current);
   }
 
   return (
@@ -81,35 +58,23 @@ export default function TimeLogs() {
                 <Card.Body>
                   <Card.Title className='border-bottom'>Parameters</Card.Title>
                   <Form>
-                    <Form.Group>
-                    <Form.Label>Customer</Form.Label>
-                    <Select 
-                      isSearchable
-                      isClearable
-                      name="company"
-                      options={companies.current}
-                      onChange={setSelectedOption}
-                    />
-                    </Form.Group>
-                    <Form.Group>
-                      <Form.Label>Date Range</Form.Label>
-                      <DefinedRange
-                        onChange={item => setDateRange([item.selection])}
-                        ranges={dateRange}
+                    {/* <Form.Group>
+                      <Form.Label>Customer</Form.Label>
+                      <Select 
+                        isSearchable
+                        isClearable
+                        name="company"
+                        options={companies.current}
+                        onChange={setSelectedOption}
                       />
                     </Form.Group>
-                    <Form.Group>
-                    <Form.Label>  </Form.Label>
-                    <Form.Check 
-                      type="switch"
-                      id="open tickets"
+                    <Form.Check
+                      id="closed tickets"
                       label="Show closed tickets"
                       name="showClosed"
                       onChange={handleExportChange}
-                    />
-                    </Form.Group>
+                    /> */}
                     <Form.Group>
-                      <Form.Label>   </Form.Label>
                       <Button onClick={handleExportSubmit}>Submit</Button>
                     </Form.Group>
                   </Form>
@@ -117,25 +82,32 @@ export default function TimeLogs() {
               </Col>
               <Col>
                 <Card.Body>
-                  <Card.Title className='border-bottom'>Results</Card.Title>
-                  <Row className="mb-2">
-                    <span>
-                      Ticket ID: 134588 Agent: Jonathan George Date: 1/13/23 Time: 1hr 30min<br />
-                      Timelog description...
-                    </span>
-                  </Row>
-                  <Row className="mb-2">
-                    <span>
-                      Ticket ID: 472891 Agent: John Bell Date: 1/11/23 Time: 30min<br />
-                      Timelog description...
-                    </span>
-                  </Row>
-                  <Row className="mb-2">
-                    <span>
-                      Ticket ID: 184628 Agent: Wes Marques Date: 1/10/23 Time: 1hr<br />
-                      Timelog description...
-                    </span>
-                  </Row>
+                  <Card.Title className='border-bottom'>Results ({timelogs.current.length})</Card.Title>
+                  
+                      <Table striped>
+                        <tbody>
+                        {timelogs.current.map(timelog => {
+                          let ticketUrl = `https://onecomm.teamwork.com/desk/tickets/${timelog.ticket.id}/messages`;
+                          var measuredTime = new Date(null);
+                          measuredTime.setSeconds(timelog.seconds); // specify value of SECONDS
+                          var MHSTime = measuredTime.toISOString().substr(11, 8);
+                          return (
+                            <tr>
+                            <Row className="mb-2">
+                              <Row>
+                                <Col>Ticket ID: <a href={ticketUrl} target='_blank' rel='noreferrer'>{timelog.ticket.id}</a></Col>
+                                <Col>Date: {moment(timelog.date).format('MM/DD/YYYY')}</Col>
+                                <Col>Time: {MHSTime}</Col>
+                              </Row>
+                              <Row>
+                                <Col>{timelog.description}</Col>
+                              </Row>
+                            </Row>
+                            </tr>
+                          )})}
+                        </tbody>
+                      </Table>
+                    
                 </Card.Body>
               </Col>
             </Row>

@@ -22,7 +22,7 @@ function GetCompanies() {
   return companies;
 }
 
-function GetTimelogs(company, dateRange, showClosed) {
+function GetTimelogs(company, showClosed) {
   const baseURL = "https://oc-tech-tools-api.herokuapp.com";
 
   const teamworkApi = axios.create({
@@ -33,7 +33,6 @@ function GetTimelogs(company, dateRange, showClosed) {
     '/teamwork/timelogs', {
       params: {
         company,
-        dateRange,
         showClosed
       }
     });
