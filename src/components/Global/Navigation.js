@@ -6,15 +6,13 @@ import ocLogo from '../../assets/img/oc-logo.png';
 import project from '../../../package.json';
 
 export default function Navigation() {
-	const metadata = require('heroku-dyno-metadata');
   const [gitHash, setGitHash ] = useState('githash');
 	const [buildDate, setBuildDate] = useState('builddate')
 
   useEffect(() => {
-		if (metadata.slugCommit) setGitHash(metadata.slugCommit);
-		if (metadata.releaseCreatedAt) setBuildDate(metadata.releaseCreatedAt);
-		console.log(metadata);
-	}, [metadata]);
+		if (process.env.REACT_APP_SLUG_DESCRIPTION) setGitHash(process.env.REACT_APP_SLUG_DESCRIPTION);
+		if (process.env.REACT_APP_RELEASE_CREATED_AT) setBuildDate(process.env.REACT_APP_RELEASE_CREATED_AT);
+	}, []);
 
   return (
     <div className='d-flex flex-column vertical-nav text-white' id='sidebar'>
@@ -28,7 +26,7 @@ export default function Navigation() {
           </div>
         </Link>
         <hr />
-        <div className='p-4'>
+        <div>
           <Navbar variant='dark'>
             <Nav className="flex-column">
               <Navbar.Text as='h6' className='text-uppercase text-white'>Applications</Navbar.Text>
@@ -36,7 +34,32 @@ export default function Navigation() {
               
               <hr/>
               <Navbar.Text as='h6' className='text-uppercase text-white'>Utilities</Navbar.Text>
-              
+              <Link className='nav-link' to="/utils/domain">
+                <OverlayTrigger
+                  key='domain'
+                  placement='right'
+                  overlay={
+                    <Tooltip>
+                      Tool for looking up domain information
+                    </Tooltip>
+                  }
+                >
+                  <p>Domain Tool</p>
+                </OverlayTrigger>
+              </Link>
+              <Link className='nav-link' to="/utils/timelogs">
+                <OverlayTrigger
+                  key='domain'
+                  placement='right'
+                  overlay={
+                    <Tooltip>
+                      Tool for generating time logs from Teamwork Desk
+                    </Tooltip>
+                  }
+                >
+                  <p>Timelog Tool</p>
+                </OverlayTrigger>
+              </Link>
               <Link className='nav-link' to="/utils/opt43">
                 <OverlayTrigger
                   key='opt43'
@@ -68,13 +91,13 @@ export default function Navigation() {
         </div>
       </div>
       <div className="fixed-bottom py-4 px-3 ">
-        <img src={ocLogo} alt="" width={190} className="py-2" />{' '}
         <small>
-        <p>{`Version ${project.version}`} <br />
-				   {gitHash} <br />
-					 {buildDate} <br />
-        <a href='mailto:jgeorge@one-comm.com' style={{color:'white'}}>Submit Bugs</a></p>
+          <p>{`Version ${project.version}`} <br />
+            {gitHash} <br />
+            {buildDate} <br />
+          <a href='mailto:techtoolsbugreport@fire.fundersclub.com' style={{color:'white'}}>Submit Bugs</a></p>
         </small>
+        <img src={ocLogo} alt="" width={75} className="py-2" />{' '}
       </div>
     </div>
   );
