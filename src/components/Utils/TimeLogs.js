@@ -34,6 +34,9 @@ export default function TimeLogs() {
 
     const { data } = await GetTimelogs();
     timelogsRef.current = data[0].timelogs;
+    timelogsRef.current.sort((a, b) => {
+      return a.ticket.id - b.ticket.id;
+    })
     console.log(timelogsRef.current);
     setTimelogs(timelogsRef.current);
   }
