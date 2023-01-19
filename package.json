@@ -11,6 +11,7 @@
     "bootstrap-select": "^1.13.18",
     "date-fns": "^2.29.3",
     "fs": "^0.0.1-security",
+    "humanize-duration": "^3.28.0",
     "jquery": "^3.6.3",
     "mailauth": "^4.0.2",
     "moment": "^2.29.4",

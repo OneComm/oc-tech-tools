@@ -22,6 +22,16 @@ function GetCompanies() {
   return companies;
 }
 
+function GetTicket(id) {
+  const baseURL = "https://oc-tech-tools-api.herokuapp.com";
+
+  const teamworkApi = axios.create({
+    baseURL
+  });
+
+  return teamworkApi.get(`/teamwork/tickets/${id}`);
+}
+
 function GetTimelogs(company, showClosed) {
   const baseURL = "https://oc-tech-tools-api.herokuapp.com";
 
@@ -39,4 +49,4 @@ function GetTimelogs(company, showClosed) {
   return timelogs;
 }
 
-export {GetAgents, GetCompanies, GetTimelogs};
+export {GetAgents, GetCompanies, GetTicket, GetTimelogs};
