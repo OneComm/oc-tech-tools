@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { GetCompanies, GetTicket, GetTimelogs } from '../../api/teamwork';
-import { Row, Col, Button, Card, Tabs, Tab, Form, Table } from 'react-bootstrap';
+import { Row, Col, Button, Card, Tabs, Tab, Form, Table, Alert } from 'react-bootstrap';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import Loading from '../Global/Loading';
@@ -36,7 +36,6 @@ export default function TimeLogs() {
 
     const { data } = await GetTimelogs();
     timelogsRef.current = data;
-    console.log(timelogsRef.current);
     setTickets(timelogsRef.current);
     setIsLoading(false);
   }
@@ -92,7 +91,7 @@ export default function TimeLogs() {
                         {tickets.map(ticket => {
                           //let ticketUrl = `https://onecomm.teamwork.com/desk/tickets/${ticket.id}/messages`;
                           return (
-                            <Card className="mb-3 p-4">
+                            <Card key={ticket.id} className="mb-3 p-4">
                               <Row className="mb-3">
                                 SO# - {ticket.id}<br/>
                                 Company - {ticket.company.name}<br/>
@@ -101,18 +100,23 @@ export default function TimeLogs() {
                               </Row>
                               <Table striped bordered>
                                 <tbody>
-                                {ticket.timelogs[0].map(timelog => {
-                                let ms = timelog.seconds * 1000;
-                                let hrTime = humanizeDuration(ms);
-                                return (
-                                  <tr>
-                                    <Row>
-                                      Date - {moment(timelog.date).format('MM/DD/YY')} Time - {hrTime}<br/>
-                                      {timelog.description}
-                                    </Row>
-                                  </tr>
-                                )
-                              })}
+                                  {ticket.timelogsError ?
+                                    <tr>
+                                      <td><Alert variant="danger">Timelogs missing!</Alert></td>
+                                    </tr>
+                                    :
+                                    ticket.timelogs[0].map(timelog => {
+                                    let ms = timelog.seconds * 1000;
+                                    let hrTime = humanizeDuration(ms);
+                                    return (
+                                      <tr key={timelog.id}>
+                                        <td>
+                                          Date - {moment(timelog.date).format('MM/DD/YY')} Time - {hrTime}<br/>
+                                          {timelog.description}
+                                        </td>
+                                      </tr>
+                                    )
+                                  })}
                                 </tbody>
                               </Table>
                             </Card>
