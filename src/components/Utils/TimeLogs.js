@@ -1,19 +1,20 @@
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
-import { GetCompanies, GetTimelogs } from '../../api/teamwork';
+import { GetCompanies, GetTicket, GetTimelogs } from '../../api/teamwork';
 import { Row, Col, Button, Card, Tabs, Tab, Form, Table } from 'react-bootstrap';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import Loading from '../Global/Loading';
 import { CombineArray } from '../../api/combineArray';
 import moment from 'moment';
+import humanizeDuration  from 'humanize-duration'
 
 export default function TimeLogs() {
   const [isLoading, setIsLoading] = useState(true);
   const companies = useRef([]);
   const joinedArray = useRef([]);
   const timelogsRef = useRef([]);
-  const [timelogs, setTimelogs] = useState([]);
+  const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
     GetCompanies()
@@ -34,12 +35,9 @@ export default function TimeLogs() {
     e.preventDefault();
 
     const { data } = await GetTimelogs();
-    timelogsRef.current = data[0].timelogs;
-    timelogsRef.current.sort((a, b) => {
-      return a.ticket.id - b.ticket.id;
-    })
+    timelogsRef.current = data;
     console.log(timelogsRef.current);
-    setTimelogs(timelogsRef.current);
+    setTickets(timelogsRef.current);
     setIsLoading(false);
   }
 
@@ -89,31 +87,38 @@ export default function TimeLogs() {
               </Col>
               <Col>
                 <Card.Body>
-                  <Card.Title className='border-bottom'>Results ({timelogs.length})</Card.Title>
-                  
-                      <Table striped>
-                        <tbody>
-                        {timelogs.map(timelog => {
-                          let ticketUrl = `https://onecomm.teamwork.com/desk/tickets/${timelog.ticket.id}/messages`;
-                          var measuredTime = new Date(null);
-                          measuredTime.setSeconds(timelog.seconds); // specify value of SECONDS
-                          var MHSTime = measuredTime.toISOString().substr(11, 8);
+                  <Card.Title className='border-bottom'>Results ({tickets.length})</Card.Title>
+                      <Row>
+                        {tickets.map(ticket => {
+                          //let ticketUrl = `https://onecomm.teamwork.com/desk/tickets/${ticket.id}/messages`;
                           return (
-                            <tr>
-                              <Row className="mb-2">
-                                <Row>
-                                  <Col>Ticket ID: <a href={ticketUrl} target='_blank' rel='noreferrer'>{timelog.ticket.id}</a></Col>
-                                  <Col>Date: {moment(timelog.date).format('MM/DD/YYYY')}</Col>
-                                  <Col>Time: {MHSTime}</Col>
-                                </Row>
-                                <Row>
-                                  <Col>{timelog.description}</Col>
-                                </Row>
+                            <Card className="mb-3 p-4">
+                              <Row className="mb-3">
+                                SO# - {ticket.id}<br/>
+                                Company - {ticket.company.name}<br/>
+                                Customer - {ticket.customer.firstName} {ticket.customer.lastName}<br/><br/>
+                                Description - {ticket.subject}<br/>
                               </Row>
-                            </tr>
-                          )})}
-                        </tbody>
-                      </Table>
+                              <Table striped bordered>
+                                <tbody>
+                                {ticket.timelogs[0].map(timelog => {
+                                let ms = timelog.seconds * 1000;
+                                let hrTime = humanizeDuration(ms);
+                                return (
+                                  <tr>
+                                    <Row>
+                                      Date - {moment(timelog.date).format('MM/DD/YY')} Time - {hrTime}<br/>
+                                      {timelog.description}
+                                    </Row>
+                                  </tr>
+                                )
+                              })}
+                                </tbody>
+                              </Table>
+                            </Card>
+                          )
+                        })}
+                      </Row>
                     
                 </Card.Body>
               </Col>
