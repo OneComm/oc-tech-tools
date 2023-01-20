@@ -35,6 +35,12 @@ export default function TimeLogs() {
     e.preventDefault();
 
     const { data } = await GetTimelogs();
+    console.log(data);
+    if(data.message) {
+      alert(`Error! Status: ${data.status} Message: ${data.message}`);
+      setIsLoading(false);
+      return;
+    }
     timelogsRef.current = data;
     setTickets(timelogsRef.current);
     setIsLoading(false);
@@ -105,7 +111,7 @@ export default function TimeLogs() {
                                       <td><Alert variant="danger">Timelogs missing!</Alert></td>
                                     </tr>
                                     :
-                                    ticket.timelogs[0].map(timelog => {
+                                    ticket.timelogs.map(timelog => {
                                     let ms = timelog.seconds * 1000;
                                     let hrTime = humanizeDuration(ms);
                                     return (
