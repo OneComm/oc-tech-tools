@@ -5,7 +5,7 @@ import logo from '../../assets/img/logo.svg';
 import ocLogo from '../../assets/img/oc-logo.png';
 import project from '../../../package.json';
 
-export default function Navigation() {
+export default function Navigation(props) {
   const [gitHash, setGitHash ] = useState('githash');
 	const [buildDate, setBuildDate] = useState('builddate')
 
@@ -13,6 +13,17 @@ export default function Navigation() {
 		if (process.env.REACT_APP_SLUG_DESCRIPTION) setGitHash(process.env.REACT_APP_SLUG_DESCRIPTION);
 		if (process.env.REACT_APP_RELEASE_CREATED_AT) setBuildDate(process.env.REACT_APP_RELEASE_CREATED_AT);
 	}, []);
+
+  const {accounts} = props;
+  const azureGroupId = process.env.REACT_APP_AZURE_TIMELOGS_GROUP_ID;
+  const account = accounts[0];
+  const isTimelogsAuthorizedUser = account.idTokenClaims.groups.map(groupId => {
+    if(groupId === azureGroupId) {
+      return true;
+    } else {
+      return false;
+    }
+  });
 
   return (
     <div className='d-flex flex-column vertical-nav text-white' id='sidebar'>
@@ -47,6 +58,7 @@ export default function Navigation() {
                   <p>Domain Tool</p>
                 </OverlayTrigger>
               </Link>
+              {isTimelogsAuthorizedUser ?
               <Link className='nav-link' to="/utils/timelogs">
                 <OverlayTrigger
                   key='domain'
@@ -60,6 +72,7 @@ export default function Navigation() {
                   <p>Timelog Tool</p>
                 </OverlayTrigger>
               </Link>
+              : null }
               <Link className='nav-link' to="/utils/opt43">
                 <OverlayTrigger
                   key='opt43'

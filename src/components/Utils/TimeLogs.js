@@ -9,7 +9,18 @@ import { CombineArray } from '../../api/combineArray';
 import moment from 'moment';
 import humanizeDuration  from 'humanize-duration'
 
-export default function TimeLogs() {
+export default function TimeLogs(props) {
+  const {accounts} = props;
+  const azureGroupId = process.env.REACT_APP_AZURE_TIMELOGS_GROUP_ID;
+  const account = accounts[0];
+  const isAuthorizedUser = account.idTokenClaims.groups.map(groupId => {
+    if(groupId === azureGroupId) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  
   const [isLoading, setIsLoading] = useState(true);
   const companies = useRef([]);
   const joinedArray = useRef([]);
@@ -49,6 +60,7 @@ export default function TimeLogs() {
   return (
     <div className='page-content p-3'>
       <Card>
+      {isAuthorizedUser ? 
         <Card.Body>
           <Card.Title className='border-bottom'>Timelog Tool</Card.Title>
           <Row className="py-2 mb-3">
@@ -147,6 +159,7 @@ export default function TimeLogs() {
           
           }
         </Card.Body>
+        : <span>Not Allowed</span>}
       </Card>
     </div>
   );
