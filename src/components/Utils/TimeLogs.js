@@ -13,21 +13,20 @@ export default function TimeLogs(props) {
   const {accounts} = props;
   const azureGroupId = process.env.REACT_APP_AZURE_TIMELOGS_GROUP_ID;
   const account = accounts[0];
-  const isAuthorizedUser = account.idTokenClaims.groups.map(groupId => {
-    if(groupId === azureGroupId) {
-      return true;
-    } else {
-      return false;
-    }
+  const accountGroups = account.idTokenClaims.groups;
+  console.log(accountGroups);
+  const isAuthorizedUser = accountGroups.some(element => {
+    return element === azureGroupId;
   });
+  console.log(isAuthorizedUser);
   
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const companies = useRef([]);
   const joinedArray = useRef([]);
   const timelogsRef = useRef([]);
   const [tickets, setTickets] = useState([]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     GetCompanies()
     .then(result => {
       joinedArray.current = [];
@@ -39,7 +38,7 @@ export default function TimeLogs(props) {
       setIsLoading(false);
     })
     .catch(error => console.error(error));
-  }, []);
+  }, []); */
 
   const handleExportSubmit = async (e) => {
     setIsLoading(true);
