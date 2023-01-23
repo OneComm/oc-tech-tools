@@ -17,12 +17,9 @@ export default function Navigation(props) {
   const {accounts} = props;
   const azureGroupId = process.env.REACT_APP_AZURE_TIMELOGS_GROUP_ID;
   const account = accounts[0];
-  const isTimelogsAuthorizedUser = account.idTokenClaims.groups.map(groupId => {
-    if(groupId === azureGroupId) {
-      return true;
-    } else {
-      return false;
-    }
+  const accountGroups = account.idTokenClaims.groups;
+  const isTimelogsAuthorizedUser = accountGroups.some(group => {
+    return group === azureGroupId;
   });
 
   return (
