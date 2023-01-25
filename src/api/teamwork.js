@@ -62,6 +62,7 @@ function CreateTimelog(apiKey, ticketId, agentId, date, seconds, description) {
 }
 
 function GetTimelogs(apiKey, company, showClosed) {
+  console.log(apiKey);
   const baseURL = "https://oc-tech-tools-api.herokuapp.com";
 
   const teamworkApi = axios.create({
@@ -71,12 +72,7 @@ function GetTimelogs(apiKey, company, showClosed) {
     }
   });
 
-  const timelogs = teamworkApi.get(
-    '/teamwork/timelogs', {
-      apiKey,
-      company,
-      showClosed
-    });
+  const timelogs = teamworkApi.get('/teamwork/timelogs');
   return timelogs;
 }
 

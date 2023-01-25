@@ -91,7 +91,7 @@ export default function TimeLogs(props) {
     setIsLoading(true);
     e.preventDefault();
 
-    const { data } = await GetTimelogs();
+    const { data } = await GetTimelogs(timelogSettings.teamworkApiKey);
     console.log(data);
     if(data.message) {
       alert(`Error! Status: ${data.status} Message: ${data.message}`);
