@@ -24,10 +24,22 @@ function SignIn() {
   return <Auth msal={instance} />
 }
 
+function GetNavigation() {
+  const { instance, accounts } = useMsal();
+
+  return <Navigation instance={instance} accounts={accounts} />
+}
+
 function GetHeader() {
   const { instance, accounts } = useMsal();
 
   return <Header instance={instance} accounts={accounts} />;
+}
+
+function GetTimeLogs() {
+  const { instance, accounts } = useMsal();
+
+  return <TimeLogs instance={instance} accounts={accounts} />;
 }
 
 export default function App() {
@@ -40,13 +52,13 @@ export default function App() {
       <>
         <AuthenticatedTemplate>
           <Router>
-            <Navigation />
+            <GetNavigation />
             <GetHeader />
             <Routes>
               <Route exact path="/" element={ <Dashboard /> } />
               <Route path="/utils/domain" element={ <Domain /> } />
               <Route path="/utils/email" element={ <Email /> } />
-              <Route path="/utils/timelogs" element={ <TimeLogs /> } />
+              <Route path="/utils/timelogs" element={ <GetTimeLogs /> } />
               <Route path="/utils/opt43" element={ <Option43 /> } />
               <Route path="/utils/opt125" element={ <Option125 /> } />
               <Route path="*" element={ <NotFound />} />
