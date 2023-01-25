@@ -15,7 +15,6 @@ function GetAgents(apiKey) {
 }
 
 function GetCompanies(apiKey) {
-  console.log(`GetAgents: ${apiKey}`);
   const baseURL = "https://oc-tech-tools-api.herokuapp.com";
 
   const teamworkApi = axios.create({

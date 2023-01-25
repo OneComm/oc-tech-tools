@@ -54,9 +54,7 @@ export default function TimeLogs(props) {
       intuitApiKey
     });
 
-    setTimeout(() => {
-      console.log(teamworkApiKey, intuitApiKey);
-    
+    setTimeout(() => {    
       GetCompanies(teamworkApiKey)
       .then(result => {
         joinedArray.current = [];
