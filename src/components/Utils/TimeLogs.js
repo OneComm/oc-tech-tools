@@ -46,6 +46,7 @@ export default function TimeLogs(props) {
   const [timelogSettings, setTimelogSettings] = useState(initialSettingsState);
 
   useEffect(() => {
+    console.log(isAuthorizedUser);
     const teamworkApiKey = localStorage.getItem("teamworkApiKey") || "";
     const intuitApiKey = localStorage.getItem("intuitApiKey") || "";
 
