@@ -18,6 +18,7 @@ export default function TimeLogs(props) {
   const isAuthorizedUser = accountGroups.some(group => {
     return group === azureGroupId;
   });
+  const [hasTeamworkApiKey, setHasTeamworkApiKey] = useState(false);
   
   const [isLoading, setIsLoading] = useState(true);
   const companies = useRef([]);
@@ -54,28 +55,33 @@ export default function TimeLogs(props) {
       intuitApiKey
     });
 
-    setTimeout(() => {    
-      GetCompanies(teamworkApiKey)
-      .then(result => {
-        joinedArray.current = [];
-        joinedArray.current = CombineArray(result);
-        for (let i = 0; i < joinedArray.current.length; i++) {
-          const company = joinedArray.current[i];
-          companies.current.push({value: company.id, label: company.name});
-        }
-      })
-      .catch(error => console.error(error));
+    setTimeout(() => {  
+      if (teamworkApiKey === ""){
+        alert("Teamwork API Key missing! Please add in settings.");
+      } else {
+        setHasTeamworkApiKey(true);
+        GetCompanies(teamworkApiKey)
+        .then(result => {
+          joinedArray.current = [];
+          joinedArray.current = CombineArray(result);
+          for (let i = 0; i < joinedArray.current.length; i++) {
+            const company = joinedArray.current[i];
+            companies.current.push({value: company.id, label: company.name});
+          }
+        })
+        .catch(error => console.error(error));
 
-      GetAgents(teamworkApiKey)
-      .then(result => {
-        joinedArray.current = [];
-        joinedArray.current = CombineArray(result);
-        for (let j = 0; j < joinedArray.current.length; j++) {
-          const agent = joinedArray.current[j];
-          agents.current.push({value: agent.id, label: `${agent.firstName} ${agent.lastName}`});
-        }
-      })
-      .catch(error => console.log(error));
+        GetAgents(teamworkApiKey)
+        .then(result => {
+          joinedArray.current = [];
+          joinedArray.current = CombineArray(result);
+          for (let j = 0; j < joinedArray.current.length; j++) {
+            const agent = joinedArray.current[j];
+            agents.current.push({value: agent.id, label: `${agent.firstName} ${agent.lastName}`});
+          }
+        })
+        .catch(error => console.log(error));
+      }
 
       setIsLoading(false);
     }, 2000);
@@ -147,6 +153,7 @@ export default function TimeLogs(props) {
     console.log(timelogSettings);
     localStorage.setItem("teamworkApiKey", timelogSettings.teamworkApiKey);
     localStorage.setItem("intuitApiKey", timelogSettings.intuitApiKey);
+    window.location.reload(true);
   }
 
   return (
@@ -161,149 +168,179 @@ export default function TimeLogs(props) {
           {isLoading ?
           <Row><Loading /></Row>
           :
-          <Tabs
-            defaultActiveKey="export"
-            id="uncontrolled-tab-example"
-            className="mb-3"
-          >
-            <Tab eventKey="export" title="Export">
-              <Row>
-              <Col as={Card} xs={3}>
-                <Card.Body>
-                  <Card.Title className='border-bottom'>Parameters</Card.Title>
-                  <Form>
-                    {/* <Form.Group>
-                      <Form.Label>Customer</Form.Label>
+          <>
+            {hasTeamworkApiKey ?
+            <Tabs
+              defaultActiveKey="export"
+              id="uncontrolled-tab-example"
+              className="mb-3"
+            >
+              <Tab eventKey="export" title="Export">
+                <Row>
+                <Col as={Card} xs={3}>
+                  <Card.Body>
+                    <Card.Title className='border-bottom'>Parameters</Card.Title>
+                    <Form>
+                      {/* <Form.Group>
+                        <Form.Label>Customer</Form.Label>
+                        <Select 
+                          isSearchable
+                          isClearable
+                          name="company"
+                          options={companies.current}
+                          onChange={setSelectedOption}
+                        />
+                      </Form.Group>
+                      <Form.Check
+                        id="closed tickets"
+                        label="Show closed tickets"
+                        name="showClosed"
+                        onChange={handleExportChange}
+                      /> */}
+                      <Form.Group>
+                        <Button onClick={handleExportSubmit}>Submit</Button>
+                      </Form.Group>
+                    </Form>
+                  </Card.Body>
+                </Col>
+                <Col>
+                  <Card.Body>
+                    <Card.Title className='border-bottom'>Results ({tickets.length})</Card.Title>
+                        <Row>
+                          {tickets.map(ticket => {
+                            //let ticketUrl = `https://onecomm.teamwork.com/desk/tickets/${ticket.id}/messages`;
+                            return (
+                              <Card key={ticket.id} className="mb-3 p-4">
+                                <Row className="mb-3">
+                                  SO# - {ticket.id}<br/>
+                                  Company - {ticket.company.name}<br/>
+                                  Customer - {ticket.customer.firstName} {ticket.customer.lastName}<br/><br/>
+                                  Description - {ticket.subject}<br/>
+                                </Row>
+                                <Table striped bordered>
+                                  <tbody>
+                                    {ticket.timelogsError ?
+                                      <tr>
+                                        <td><Alert variant="danger">Timelogs missing!</Alert></td>
+                                      </tr>
+                                      :
+                                      ticket.timelogs.map(timelog => {
+                                      let ms = timelog.seconds * 1000;
+                                      let hrTime = humanizeDuration(ms);
+                                      return (
+                                        <tr key={timelog.id}>
+                                          <td>
+                                            Date - {moment(timelog.date).format('MM/DD/YY')} Time - {hrTime}<br/>
+                                            {timelog.description}
+                                          </td>
+                                        </tr>
+                                      )
+                                    })}
+                                  </tbody>
+                                </Table>
+                              </Card>
+                            )
+                          })}
+                        </Row>
+                      
+                  </Card.Body>
+                </Col>
+              </Row>
+              </Tab>
+              <Tab eventKey="create" title="Create Timelog">
+                {createResult ?
+                <Alert variant="success">Timelog sucessfully created!</Alert>
+                :
+                null
+                }
+                <Form onSubmit={handleCreateSubmit}>
+                  <Row className="mb-3">
+                    <Form.Group as={Col}>
+                      <Form.Label>Ticket #</Form.Label>
+                      <Form.Control type="text" name="ticket" placeholder="123456" onChange={handleCreateChange} />
+                      <Form.Text>Enter ticket ID without the hastag.</Form.Text>
+                    </Form.Group>
+                    <Form.Group as={Col}>
+                      <Form.Label>Agent</Form.Label>
                       <Select 
-                        isSearchable
-                        isClearable
-                        name="company"
-                        options={companies.current}
-                        onChange={setSelectedOption}
+                        name="agent"
+                        options={agents.current}
+                        onChange={setSelectedAgent}
                       />
                     </Form.Group>
-                    <Form.Check
-                      id="closed tickets"
-                      label="Show closed tickets"
-                      name="showClosed"
-                      onChange={handleExportChange}
-                    /> */}
-                    <Form.Group>
-                      <Button onClick={handleExportSubmit}>Submit</Button>
+                  </Row>
+                  <Row className="mb-3">
+                    <Form.Group as={Col}>
+                      <Form.Label>Time</Form.Label>
+                      <Form.Control type="text" name="time"  placeholder="hh:mm:ss" onChange={handleCreateChange}/>
                     </Form.Group>
-                  </Form>
-                </Card.Body>
-              </Col>
-              <Col>
-                <Card.Body>
-                  <Card.Title className='border-bottom'>Results ({tickets.length})</Card.Title>
-                      <Row>
-                        {tickets.map(ticket => {
-                          //let ticketUrl = `https://onecomm.teamwork.com/desk/tickets/${ticket.id}/messages`;
-                          return (
-                            <Card key={ticket.id} className="mb-3 p-4">
-                              <Row className="mb-3">
-                                SO# - {ticket.id}<br/>
-                                Company - {ticket.company.name}<br/>
-                                Customer - {ticket.customer.firstName} {ticket.customer.lastName}<br/><br/>
-                                Description - {ticket.subject}<br/>
-                              </Row>
-                              <Table striped bordered>
-                                <tbody>
-                                  {ticket.timelogsError ?
-                                    <tr>
-                                      <td><Alert variant="danger">Timelogs missing!</Alert></td>
-                                    </tr>
-                                    :
-                                    ticket.timelogs.map(timelog => {
-                                    let ms = timelog.seconds * 1000;
-                                    let hrTime = humanizeDuration(ms);
-                                    return (
-                                      <tr key={timelog.id}>
-                                        <td>
-                                          Date - {moment(timelog.date).format('MM/DD/YY')} Time - {hrTime}<br/>
-                                          {timelog.description}
-                                        </td>
-                                      </tr>
-                                    )
-                                  })}
-                                </tbody>
-                              </Table>
-                            </Card>
-                          )
-                        })}
-                      </Row>
-                    
-                </Card.Body>
-              </Col>
-            </Row>
-            </Tab>
-            <Tab eventKey="create" title="Create Timelog">
-              {createResult ?
-              <Alert variant="success">Timelog sucessfully created!</Alert>
-              :
-              null
-              }
-              <Form onSubmit={handleCreateSubmit}>
-                <Row className="mb-3">
-                  <Form.Group as={Col}>
-                    <Form.Label>Ticket #</Form.Label>
-                    <Form.Control type="text" name="ticket" placeholder="123456" onChange={handleCreateChange} />
-                    <Form.Text>Enter ticket ID without the hastag.</Form.Text>
-                  </Form.Group>
-                  <Form.Group as={Col}>
-                    <Form.Label>Agent</Form.Label>
-                    <Select 
-                      name="agent"
-                      options={agents.current}
-                      onChange={setSelectedAgent}
-                    />
-                  </Form.Group>
-                </Row>
-                <Row className="mb-3">
-                  <Form.Group as={Col}>
-                    <Form.Label>Time</Form.Label>
-                    <Form.Control type="text" name="time"  placeholder="hh:mm:ss" onChange={handleCreateChange}/>
-                  </Form.Group>
-                  <Form.Group as={Col}>
-                    <Form.Label>Date</Form.Label>
-                    <Form.Control type="date" name="date" onChange={handleCreateChange} />
-                  </Form.Group>
-                </Row>
-                <Row className="mb-3">
-                  <Form.Group>
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control as="textarea" name="description" rows={10} onChange={handleCreateChange} />
-                  </Form.Group>
-                </Row>
-                <Row className="mb-3">
-                  <Col></Col>
-                  <Col>
-                    <Button style={{"float": "right"}} type="submit">Submit</Button>
-                  </Col>
-                </Row>
-              </Form>
-            </Tab>
-            <Tab eventKey="settings" title="Settings">
-              <Form onSubmit={handleSettingsSubmit}>
-                <Row className="mb-3">
-                  <Form.Group as={Col}>
-                    <Form.Label>Teamwork API Key</Form.Label>
-                    <Form.Control as="textarea" name="teamworkApiKey" value={timelogSettings.teamworkApiKey} onChange={handleTimelogSettingsChange} />
-                    <Form.Text>Go to your <a href="https://onecomm.teamwork.com/desk/myprofile/apikeys" target="_blank" rel="noreferrer">teamwork desk profile</a> and generate a v2 api key with no expiration.</Form.Text>
-                  </Form.Group>
-                  <Form.Group as={Col}>
-                    <Form.Label>Intuit API Key</Form.Label>
-                    <Form.Control as="textarea" name="intuitApiKey" value={timelogSettings.intuitApiKey} onChange={handleTimelogSettingsChange} />
-                  </Form.Group>
-                </Row>
-                <Row className="mb-3">
-                  <Col></Col>
-                  <Col><Button style={{"float": "right"}} type="submit" >Update</Button></Col>
-                </Row>
-              </Form>
-            </Tab>
-          </Tabs>
+                    <Form.Group as={Col}>
+                      <Form.Label>Date</Form.Label>
+                      <Form.Control type="date" name="date" onChange={handleCreateChange} />
+                    </Form.Group>
+                  </Row>
+                  <Row className="mb-3">
+                    <Form.Group>
+                      <Form.Label>Description</Form.Label>
+                      <Form.Control as="textarea" name="description" rows={10} onChange={handleCreateChange} />
+                    </Form.Group>
+                  </Row>
+                  <Row className="mb-3">
+                    <Col></Col>
+                    <Col>
+                      <Button style={{"float": "right"}} type="submit">Submit</Button>
+                    </Col>
+                  </Row>
+                </Form>
+              </Tab>
+              <Tab eventKey="settings" title="Settings">
+                <Form onSubmit={handleSettingsSubmit}>
+                  <Row className="mb-3">
+                    <Form.Group as={Col}>
+                      <Form.Label>Teamwork API Key</Form.Label>
+                      <Form.Control as="textarea" name="teamworkApiKey" value={timelogSettings.teamworkApiKey} onChange={handleTimelogSettingsChange} />
+                      <Form.Text>Go to your <a href="https://onecomm.teamwork.com/desk/myprofile/apikeys" target="_blank" rel="noreferrer">teamwork desk profile</a> and generate a v2 api key with no expiration.</Form.Text>
+                    </Form.Group>
+                    <Form.Group as={Col}>
+                      <Form.Label>Intuit API Key</Form.Label>
+                      <Form.Control as="textarea" name="intuitApiKey" value={timelogSettings.intuitApiKey} onChange={handleTimelogSettingsChange} />
+                    </Form.Group>
+                  </Row>
+                  <Row className="mb-3">
+                    <Col></Col>
+                    <Col><Button style={{"float": "right"}} type="submit" >Update</Button></Col>
+                  </Row>
+                </Form>
+              </Tab>
+            </Tabs>
+            :
+            <Tabs
+              defaultActiveKey="settings"
+              id="uncontrolled-tab-example"
+              className="mb-3"
+            >
+              <Tab eventKey="settings" title="Settings">
+                <Form onSubmit={handleSettingsSubmit}>
+                  <Row className="mb-3">
+                    <Form.Group as={Col}>
+                      <Form.Label>Teamwork API Key</Form.Label>
+                      <Form.Control as="textarea" name="teamworkApiKey" value={timelogSettings.teamworkApiKey} onChange={handleTimelogSettingsChange} />
+                      <Form.Text>Go to your <a href="https://onecomm.teamwork.com/desk/myprofile/apikeys" target="_blank" rel="noreferrer">teamwork desk profile</a> and generate a v2 api key with no expiration.</Form.Text>
+                    </Form.Group>
+                    <Form.Group as={Col}>
+                      <Form.Label>Intuit API Key</Form.Label>
+                      <Form.Control as="textarea" name="intuitApiKey" value={timelogSettings.intuitApiKey} onChange={handleTimelogSettingsChange} />
+                    </Form.Group>
+                  </Row>
+                  <Row className="mb-3">
+                    <Col></Col>
+                    <Col><Button style={{"float": "right"}} type="submit" >Update</Button></Col>
+                  </Row>
+                </Form>
+              </Tab>
+            </Tabs>
+          }
+          </>
           }
         </Card.Body>
         : <span>Not Allowed</span>}
