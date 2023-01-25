@@ -46,7 +46,6 @@ export default function TimeLogs(props) {
   const [timelogSettings, setTimelogSettings] = useState(initialSettingsState);
 
   useEffect(() => {
-    console.log(isAuthorizedUser);
     const teamworkApiKey = localStorage.getItem("teamworkApiKey") || "";
     const intuitApiKey = localStorage.getItem("intuitApiKey") || "";
 
@@ -57,34 +56,36 @@ export default function TimeLogs(props) {
     });
 
     setTimeout(() => {  
-      if (teamworkApiKey === ""){
-        alert("Teamwork API Key missing! Please add in settings.");
-      } else {
-        setHasTeamworkApiKey(true);
-        GetCompanies(teamworkApiKey)
-        .then(result => {
-          joinedArray.current = [];
-          joinedArray.current = CombineArray(result);
-          for (let i = 0; i < joinedArray.current.length; i++) {
-            const company = joinedArray.current[i];
-            companies.current.push({value: company.id, label: company.name});
-          }
-        })
-        .catch(error => console.error(error));
-
-        GetAgents(teamworkApiKey)
-        .then(result => {
-          joinedArray.current = [];
-          joinedArray.current = CombineArray(result);
-          for (let j = 0; j < joinedArray.current.length; j++) {
-            const agent = joinedArray.current[j];
-            agents.current.push({value: agent.id, label: `${agent.firstName} ${agent.lastName}`});
-          }
-        })
-        .catch(error => console.log(error));
-      }
-
-      setIsLoading(false);
+      if (isAuthorizedUser) {
+        if (teamworkApiKey === ""){
+          alert("Teamwork API Key missing! Please add in settings.");
+        } else {
+          setHasTeamworkApiKey(true);
+          GetCompanies(teamworkApiKey)
+          .then(result => {
+            joinedArray.current = [];
+            joinedArray.current = CombineArray(result);
+            for (let i = 0; i < joinedArray.current.length; i++) {
+              const company = joinedArray.current[i];
+              companies.current.push({value: company.id, label: company.name});
+            }
+          })
+          .catch(error => console.error(error));
+  
+          GetAgents(teamworkApiKey)
+          .then(result => {
+            joinedArray.current = [];
+            joinedArray.current = CombineArray(result);
+            for (let j = 0; j < joinedArray.current.length; j++) {
+              const agent = joinedArray.current[j];
+              agents.current.push({value: agent.id, label: `${agent.firstName} ${agent.lastName}`});
+            }
+          })
+          .catch(error => console.log(error));
+        }
+  
+        setIsLoading(false);
+      } else {}
     }, 2000);
   }, []);
 
