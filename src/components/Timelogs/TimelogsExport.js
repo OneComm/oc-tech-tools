@@ -111,7 +111,6 @@ export default function TimelogsExport() {
                     <Table striped bordered>
                       <thead>
                         <tr>
-                          <th>ID</th>
                           <th>Date</th>
                           <th>Time</th>
                           <th>Labor Type</th>
@@ -129,13 +128,19 @@ export default function TimelogsExport() {
                           return (
                             <>
                               <tr key={timelog.id}>
-                                <td>{timelog.id}</td>
                                 <td>{moment(timelog.date).format('MM/DD/YY')}</td>
                                 <td>{hrTime}</td>
-                                <td><Form.Select></Form.Select></td>
+                                <td>
+                                  <Form.Select>
+                                    <option value="1">Data Technician Labor</option>
+                                    <option value="2">Voice Technician Labor</option>
+                                    <option value="3">After Hours Data Technician Labor</option>
+                                    <option value="4">After Hours Data Technician Labor</option>
+                                  </Form.Select>
+                                </td>
                               </tr>
                               <tr>
-                                <td colSpan={4}>
+                                <td colSpan={3}>
                                   <Table borderless>
                                     <tbody>
                                       <tr>
