@@ -39,7 +39,21 @@ export default function Navigation(props) {
             <Nav className="flex-column">
               <Navbar.Text as='h6' className='text-uppercase text-white'>Applications</Navbar.Text>
               <Link className='nav-link' to="/">Dashboard</Link>
-              
+              {isTimelogsAuthorizedUser ?
+              <Link className='nav-link' to="/utils/timelogs">
+                <OverlayTrigger
+                  key='domain'
+                  placement='right'
+                  overlay={
+                    <Tooltip>
+                      Tool for generating time logs from Teamwork Desk
+                    </Tooltip>
+                  }
+                >
+                  <p>Timelogs</p>
+                </OverlayTrigger>
+              </Link>
+              : null }
               <hr/>
               <Navbar.Text as='h6' className='text-uppercase text-white'>Utilities</Navbar.Text>
               <Link className='nav-link' to="/utils/domain">
@@ -55,21 +69,6 @@ export default function Navigation(props) {
                   <p>Domain Tool</p>
                 </OverlayTrigger>
               </Link>
-              {isTimelogsAuthorizedUser ?
-              <Link className='nav-link' to="/utils/timelogs">
-                <OverlayTrigger
-                  key='domain'
-                  placement='right'
-                  overlay={
-                    <Tooltip>
-                      Tool for generating time logs from Teamwork Desk
-                    </Tooltip>
-                  }
-                >
-                  <p>Timelog Tool</p>
-                </OverlayTrigger>
-              </Link>
-              : null }
               <Link className='nav-link' to="/utils/opt43">
                 <OverlayTrigger
                   key='opt43'

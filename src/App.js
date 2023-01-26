@@ -11,7 +11,7 @@ import Navigation from './components/Global/Navigation';
 import Dashboard from './components/Dashboard';
 import Domain from './components/Utils/Domain';
 import Email from './components/Utils/Email';
-import TimeLogs from './components/Utils/TimeLogs';
+import TimeLogs from './components/Timelogs/Timelogs';
 import Option43 from './components/Utils/Option43';
 import Option125 from './components/Utils/Option125';
 import NotFound from './components/Global/NotFound';
