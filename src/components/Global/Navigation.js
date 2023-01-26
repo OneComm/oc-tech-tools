@@ -105,7 +105,7 @@ export default function Navigation(props) {
           <p>{`Version ${project.version}`} <br />
             {gitHash} <br />
             {buildDate} <br />
-          <a href='mailto:techtoolsbugreport@fire.fundersclub.com' style={{color:'white'}}>Submit Bugs</a></p>
+          <a href='mailto:tech-tools@one-comm.com' style={{color:'white'}}>Submit Bugs</a></p>
         </small>
         <img src={ocLogo} alt="" width={75} className="py-2" />{' '}
       </div>
