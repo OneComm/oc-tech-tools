@@ -40,7 +40,7 @@ export default function Navigation(props) {
               <Navbar.Text as='h6' className='text-uppercase text-white'>Applications</Navbar.Text>
               <Link className='nav-link' to="/">Dashboard</Link>
               {isTimelogsAuthorizedUser ?
-              <Link className='nav-link' to="/utils/timelogs">
+              <Link className='nav-link' to="/timelogs">
                 <OverlayTrigger
                   key='domain'
                   placement='right'

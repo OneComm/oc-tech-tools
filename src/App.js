@@ -56,9 +56,9 @@ export default function App() {
             <GetHeader />
             <Routes>
               <Route exact path="/" element={ <Dashboard /> } />
+              <Route path="/timelogs" element={ <GetTimeLogs /> } />
               <Route path="/utils/domain" element={ <Domain /> } />
               <Route path="/utils/email" element={ <Email /> } />
-              <Route path="/utils/timelogs" element={ <GetTimeLogs /> } />
               <Route path="/utils/opt43" element={ <Option43 /> } />
               <Route path="/utils/opt125" element={ <Option125 /> } />
               <Route path="*" element={ <NotFound />} />
