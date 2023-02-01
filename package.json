@@ -5,6 +5,7 @@
   "dependencies": {
     "@azure/msal-browser": "^2.28.1",
     "@azure/msal-react": "^1.4.5",
+    "awesome-typescript-loader": "^5.2.1",
     "axios": "^1.1.2",
     "bootstrap": "^5.2.0",
     "bootstrap-daterangepicker": "^3.1.0",
@@ -24,7 +25,8 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
     "react-select": "^5.7.0",
-    "serve": "^14.0.1"
+    "serve": "^14.0.1",
+    "source-map-loader": "^4.0.1"
   },
   "scripts": {
     "update:packages": "node wipe-dependencies.js && rm -rf node_modules && npm update --save-dev && npm update --save",
