@@ -338,14 +338,19 @@ const handleNew = (e) => {
                     </Modal>
                     <Table>
                       <tbody>
-                        <tr>
-                          <td>Organization</td>
-                          <td>{domainData.registrant.organization}</td>
-                        </tr>
-                        <tr>
-                          <td>Location</td>
-                          <td>{domainData.registrant.state}, {domainData.registrant.countryCode}</td>
-                        </tr>
+                        {domainData.registrant 
+                          ? <>
+                              <tr>
+                                <td>Organization</td>
+                                <td>{domainData.registrant.organization}</td>
+                              </tr>
+                              <tr>
+                                <td>Location</td>
+                                <td>{domainData.registrant.state}, {domainData.registrant.countryCode}</td>
+                              </tr>
+                            </>
+                          : null
+                        }
                         <tr>
                           <td>Registration Date</td>
                           <td>{domainData.createdDate}</td>
