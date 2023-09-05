@@ -9,8 +9,9 @@ export async function LookupDomain(domain) {
     headers: {
       "Content-Type": "text/json",
       "Referer": "https://tech-tools.one-comm.com",
-      "Referrer-Policy": "strict-origin-when-cross-origin"
-    }
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+    },
+    withCredentials: true, // Include cookies in the request
   });
 
   try {
@@ -31,8 +32,9 @@ export async function LookupDNS(domain) {
     headers: {
       "Content-Type": "text/json",
       "Referer": "https://tech-tools.one-comm.com",
-      "Referrer-Policy": "strict-origin-when-cross-origin"
-    }
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+    },
+    withCredentials: true, // Include cookies in the request
   });
 
   try {
