@@ -4,6 +4,25 @@ import { Row, Col, Form, FloatingLabel, Button, Collapse, Card } from 'react-boo
 
 export default function Opt125() {
 
+  interface FormData {
+    id: string,
+    sw_tftp: string,
+    call_srv: string,
+    vlan: string,
+    l2p_default: string,
+    l2p_voice: string,
+    l2p_signaling: string,
+    dscp_default: string,
+    dscp_voice: string,
+    dscp_signaling: string,
+  }
+  
+  interface HexData {
+    ascii: string;
+    unformatted: string;
+    formatted: string;
+  }
+
   const initialFormData = Object.freeze({
     id: "ipphone.mitel.com",
     sw_tftp: "",
@@ -23,8 +42,8 @@ export default function Opt125() {
     formatted: ""
   });
 
-  const [formData, updateFormData] = React.useState(initialFormData);
-  const [hexData, updateHexData] = React.useState(initialHexData);
+  const [formData, updateFormData] = React.useState<FormData>(initialFormData);
+  const [hexData, updateHexData] = React.useState<HexData>(initialHexData);
   const [open, setOpen] = React.useState(false);
 
   const handleChange = (e) => {
@@ -147,7 +166,7 @@ export default function Opt125() {
               </Form.Group>
             </Row>
             <Row className="m-4">
-              <Button onClick={ handleSubmit }>Generate</Button>
+              <Button typeof="submit" onClick={ handleSubmit }>Generate</Button>
             </Row>
           </Form>
           <Collapse in={ open }>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Loading from '../global/Loading';
 import { LookupDomain, LookupDNS } from '../../api/whoisxmlapi';
 import { LookupBlacklists } from '../../api/blacklists';
@@ -7,34 +7,72 @@ import { Container, Row, Col, Form, Button, Collapse, Table, Card, Modal } from 
 
 
 export default function Domain() {
-  const initialFormData = Object.freeze({
-    domain: ""
-  });
-  const initialDomainData = {
-    "createdDate": "",
-    "updatedDate": "",
-    "expiresDate": "",
-    "registrant": {
-      "organization": "",
-      "state": "",
-      "countryCode": ""
-    },
-    "contactEmail": ""
-  };
-  const initialDnsData = [];
-  const initialBlacklistData = {
-    blacklists: []
-  };
-  const [isLoading, setLoading] = React.useState(false);
-  const [isSubmitted, setIsSubmitted] = React.useState(false);
-  const [formData, updateFormData] = React.useState(initialFormData);
-  const [domainData, updateDomainData] = React.useState(initialDomainData)
-  const [dnsData, updateDnsData] = React.useState([initialDnsData]);
-  const [blacklistData, updateBlacklistData] = React.useState(initialBlacklistData);
-  const [open, setOpen] = React.useState(false);
-  const [bldLgShow, setBldLgShow] = React.useState(false);
 
-  const handleChange = (e) => {
+  interface FormData {
+    domain: string;
+  }
+  
+  interface DomainData {
+    createdDate: string;
+    updatedDate: string;
+    expiresDate: string;
+    domainName: string;
+    registrant: {
+      organization: string;
+      state: string;
+      countryCode: string;
+    };
+    contactEmail: string;
+  }
+  
+  interface DnsRecord {
+    type: number;
+    dnsType: string;
+    name: string;
+    ttl: number;
+    address: string;
+    priority: string;
+    target: string;
+    strings: string[];
+  }
+  
+  interface BlacklistData {
+    detections: number;
+    input_raw: string;
+    blacklists: {
+      id: number;
+      name: string;
+      detected: boolean;
+    }[];
+    checks_remaining: string;
+  }  
+  const [isLoading, setLoading] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [formData, updateFormData] = useState<FormData>({ domain: "" });
+const [domainData, updateDomainData] = useState<DomainData>({
+  createdDate: "",
+  updatedDate: "",
+  expiresDate: "",
+  domainName: "",
+  registrant: {
+    organization: "",
+    state: "",
+    countryCode: ""
+  },
+  contactEmail: ""
+});
+const [dnsData, updateDnsData] = useState<DnsRecord[]>([]);
+const [blacklistData, updateBlacklistData] = useState<BlacklistData>({
+  detections: 0,
+  input_raw: "",
+  blacklists: [],
+  checks_remaining: "",
+});
+
+  const [open, setOpen] = useState(false);
+  const [bldLgShow, setBldLgShow] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateFormData({
       ...formData,
 
@@ -43,14 +81,30 @@ export default function Domain() {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     if (open) setOpen(false);
     setIsSubmitted(true);
     setLoading(true);
     e.preventDefault();
-    updateDomainData(initialDomainData);
-    updateDnsData(initialDnsData);
-    updateBlacklistData(initialBlacklistData);
+    updateDomainData({
+      createdDate: "",
+      updatedDate: "",
+      expiresDate: "",
+      domainName: "",
+      registrant: {
+        organization: "",
+        state: "",
+        countryCode: ""
+      },
+      contactEmail: ""
+    });
+    updateDnsData([]);
+    updateBlacklistData({
+      detections: 0,
+      input_raw: "",
+      blacklists: [],
+      checks_remaining: "",
+    });
     const domainResult = await LookupDomain(formData.domain);
     const whois = domainResult.data.WhoisRecord;
     updateDomainData(whois);
@@ -72,9 +126,25 @@ const handleNew = (e) => {
   setIsSubmitted(false);
   setOpen(false);
   e.preventDefault();
-  updateDomainData(initialDomainData);
-  updateDnsData(initialDnsData);
-  updateBlacklistData(initialBlacklistData);
+  updateDomainData({
+    createdDate: "",
+    updatedDate: "",
+    expiresDate: "",
+    domainName: "",
+    registrant: {
+      organization: "",
+      state: "",
+      countryCode: ""
+    },
+    contactEmail: ""
+  });
+  updateDnsData([]);
+  updateBlacklistData({
+    detections: 0,
+    input_raw: "",
+    blacklists: [],
+    checks_remaining: "",
+  });
   setLoading(false);
 }
   
@@ -110,7 +180,7 @@ const handleNew = (e) => {
                     <h5>{domainData.domainName}</h5>
                   </Col>
                   <Col sm={4}>
-                    <Button onClick={ handleNew }>New Search</Button>
+                    <Button typeof='submit' onClick={ handleNew }>New Search</Button>
                   </Col>
                 </Row>
                 <hr />
@@ -127,7 +197,8 @@ const handleNew = (e) => {
                         </tr>
                       </thead>
                       <tbody>
-                        {dnsData.map((record, index) => {
+                        {
+                        dnsData.map((record: DnsRecord, index: number) => {
                           if (record.type === 1)
                           return (
                             <tr key={index}>
@@ -153,7 +224,7 @@ const handleNew = (e) => {
                         </tr>
                       </thead>
                       <tbody>
-                        {dnsData.map((record, index) => {
+                        {dnsData.map((record: DnsRecord, index: number) => {
                           if (record.type === 28)
                           return (
                             <tr key={index}>
@@ -180,7 +251,7 @@ const handleNew = (e) => {
                         </tr>
                       </thead>
                       <tbody>
-                        {dnsData.map((record, index) => {
+                        {dnsData.map((record: DnsRecord, index: number) => {
                           if (record.type === 15)
                           return (
                             <tr key={index}>
@@ -207,7 +278,7 @@ const handleNew = (e) => {
                         </tr>
                       </thead>
                       <tbody>
-                        {dnsData.map((record, index) => {
+                        {dnsData.map((record: DnsRecord, index: number) => {
                           if (record.type === 16)
                           return (
                             <tr key={index}>

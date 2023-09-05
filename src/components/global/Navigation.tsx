@@ -18,6 +18,7 @@ export default function Navigation() {
   const { accounts } = useMsal();
   const account = accounts[0];
   const azureGroupId = process.env.REACT_APP_AZURE_TIMELOGS_GROUP_ID;
+  // @ts-ignore
   const accountGroups: string[] = account.idTokenClaims.groups;
   const isTimelogsAuthorizedUser = accountGroups.some(group => {
     return group === azureGroupId;

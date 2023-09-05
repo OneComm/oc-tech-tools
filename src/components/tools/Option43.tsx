@@ -4,6 +4,17 @@ import { Container, Row, Col, Accordion, Form, Button, Collapse, Card } from 're
 
 export default function Option43() {
 
+  interface FormData {
+    type: string;
+    ip: string;
+  }
+  
+  interface HexData {
+    ip: string;
+    unformatted: string;
+    formatted: string;
+  }
+
   const initialFormData = Object.freeze({
     type: "",
     ip: ""
@@ -15,8 +26,8 @@ export default function Option43() {
     formatted: ""
   });
 
-  const [formData, updateFormData] = React.useState(initialFormData);
-  const [hexData, updateHexData] = React.useState(initialHexData);
+  const [formData, updateFormData] = React.useState<FormData>(initialFormData);
+  const [hexData, updateHexData] = React.useState<HexData>(initialHexData);
   const [open, setOpen] = React.useState(false);
 
   const handleChange = (e) => {
@@ -63,7 +74,7 @@ export default function Option43() {
               </Form.Group>
             </Row>
             <Row className="m-4">
-              <Button  onClick={ handleSubmit }>Generate</Button>
+              <Button typeof='submit' onClick={ handleSubmit }>Generate</Button>
             </Row>
           </Form>
           <Collapse in={ open }>

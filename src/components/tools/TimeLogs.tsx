@@ -15,8 +15,8 @@ export default function TimeLogs() {
   const { accounts } = useMsal();
   const azureGroupId = process.env.REACT_APP_AZURE_TIMELOGS_GROUP_ID;
   const account = accounts[0];
-  const accountGroups: string[] = account.idTokenClaims.groups;
-  const isAuthorizedUser = accountGroups.some(group => {
+  const accountGroups: string[] = (account.idTokenClaims?.groups || []) as string[];
+  const isAuthorizedUser: boolean = accountGroups.some(group => {
     return group === azureGroupId;
   });
   const [hasTeamworkApiKey, setHasTeamworkApiKey] = useState(false);
@@ -25,7 +25,7 @@ export default function TimeLogs() {
   const companies = useRef([]);
   const joinedArray = useRef([]);
   const agents = useRef([]);
-  const [selectedAgent, setSelectedAgent] = useState();
+  const [selectedAgent, setSelectedAgent] = useState({value: null});
   const timelogsRef = useRef([]);
   const [tickets, setTickets] = useState([]);
 
@@ -33,7 +33,8 @@ export default function TimeLogs() {
   const initialCreateFormData = {
     date: "",
     description: "",
-    ticket: 0
+    ticket: 0,
+    time: "",
   }
   
   const [createFormData, updateCreateFormData] = useState(initialCreateFormData);
@@ -94,7 +95,7 @@ export default function TimeLogs() {
     setIsLoading(true);
     e.preventDefault();
 
-    const { data } = await GetTimelogs(timelogSettings.teamworkApiKey);
+    const { data } = await GetTimelogs(timelogSettings.teamworkApiKey,null,null);
     console.log(data);
     if(data.message) {
       alert(`Error! Status: ${data.status} Message: ${data.message}`);
@@ -136,7 +137,7 @@ export default function TimeLogs() {
       setTimeout(() => {
         updateCreateResult(false);
         updateCreateFormData(initialCreateFormData);
-        setSelectedAgent({});
+        setSelectedAgent({value: null});
         e.target.reset();
       }, 5000);
     })
@@ -156,7 +157,7 @@ export default function TimeLogs() {
     console.log(timelogSettings);
     localStorage.setItem("teamworkApiKey", timelogSettings.teamworkApiKey);
     localStorage.setItem("intuitApiKey", timelogSettings.intuitApiKey);
-    window.location.reload(true);
+    window.location.reload();
   }
 
   return (
