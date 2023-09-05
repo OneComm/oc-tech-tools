@@ -52,7 +52,7 @@ export default function TimelogsExport() {
       <Loading />
       :
       <Row>
-        <Col as={Card} xs={3} style={{"margin-right": 30}}>
+        <Col as={Card} xs={3} style={{marginRight: 30}}>
           <Card.Body>
             <Card.Title className='border-bottom'>Parameters</Card.Title>
             <Form>
