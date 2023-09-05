@@ -1,6 +1,6 @@
-import * as msal from "@azure/msal-browser";
+import { Configuration, PopupRequest} from "@azure/msal-browser";
 
-const msalConfig = {
+export const msalConfig: Configuration = {
   auth:{
     clientId: process.env.REACT_APP_AZURE_APP_ID,
     authority: process.env.REACT_APP_AZURE_AUTHORITY,
@@ -13,6 +13,10 @@ const msalConfig = {
   }
 };
 
-const msalInstance = new msal.PublicClientApplication(msalConfig);
+export const loginRequest: PopupRequest = {
+  scopes: ["User.Read"]
+};
 
-export { msalInstance }
+export const graphConfig = {
+  graphMeEndpoint: "https://graph.microsoft-ppe.com/v1.0/me"
+};

@@ -5,16 +5,17 @@ import { Row, Col, Button, Card, Tabs, Tab, Form, Table, Alert } from 'react-boo
 import Select from 'react-select';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-import Loading from '../Global/Loading';
+import Loading from '../global/Loading';
 import { CombineArray } from '../../api/combineArray';
 import moment from 'moment';
 import humanizeDuration  from 'humanize-duration'
+import { useMsal } from '@azure/msal-react';
 
-export default function TimeLogs(props) {
-  const {accounts} = props;
+export default function TimeLogs() {
+  const { accounts } = useMsal();
   const azureGroupId = process.env.REACT_APP_AZURE_TIMELOGS_GROUP_ID;
   const account = accounts[0];
-  const accountGroups = account.idTokenClaims.groups;
+  const accountGroups: string[] = account.idTokenClaims.groups;
   const isAuthorizedUser = accountGroups.some(group => {
     return group === azureGroupId;
   });

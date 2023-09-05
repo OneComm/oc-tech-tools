@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useMsal } from '@azure/msal-react';
 import { Nav, Navbar, OverlayTrigger,Tooltip } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/img/logo.svg';
 import ocLogo from '../../assets/img/oc-logo.png';
 import project from '../../../package.json';
 
-export default function Navigation(props) {
+export default function Navigation() {
   const [gitHash, setGitHash ] = useState('githash');
 	const [buildDate, setBuildDate] = useState('builddate')
 
@@ -14,10 +15,10 @@ export default function Navigation(props) {
 		if (process.env.REACT_APP_RELEASE_CREATED_AT) setBuildDate(process.env.REACT_APP_RELEASE_CREATED_AT);
 	}, []);
 
-  const {accounts} = props;
-  const azureGroupId = process.env.REACT_APP_AZURE_TIMELOGS_GROUP_ID;
+  const { accounts } = useMsal();
   const account = accounts[0];
-  const accountGroups = account.idTokenClaims.groups;
+  const azureGroupId = process.env.REACT_APP_AZURE_TIMELOGS_GROUP_ID;
+  const accountGroups: string[] = account.idTokenClaims.groups;
   const isTimelogsAuthorizedUser = accountGroups.some(group => {
     return group === azureGroupId;
   });
@@ -42,7 +43,7 @@ export default function Navigation(props) {
               
               <hr/>
               <Navbar.Text as='h6' className='text-uppercase text-white'>Utilities</Navbar.Text>
-              <Link className='nav-link' to="/utils/domain">
+              <Link className='nav-link' to="/tools/domain">
                 <OverlayTrigger
                   key='domain'
                   placement='right'
@@ -56,7 +57,7 @@ export default function Navigation(props) {
                 </OverlayTrigger>
               </Link>
               {isTimelogsAuthorizedUser ?
-              <Link className='nav-link' to="/utils/timelogs">
+              <Link className='nav-link' to="/tools/timelogs">
                 <OverlayTrigger
                   key='domain'
                   placement='right'
@@ -70,7 +71,7 @@ export default function Navigation(props) {
                 </OverlayTrigger>
               </Link>
               : null }
-              <Link className='nav-link' to="/utils/opt43">
+              <Link className='nav-link' to="/tools/opt43">
                 <OverlayTrigger
                   key='opt43'
                   placement='right'
@@ -83,7 +84,7 @@ export default function Navigation(props) {
                   <p>Option 43 Helper</p>
                 </OverlayTrigger>
               </Link>
-              <Link className='nav-link' to="/utils/opt125">
+              <Link className='nav-link' to="/tools/opt125">
                 <OverlayTrigger
                   key='opt125'
                   placement='right'

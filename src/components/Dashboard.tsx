@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row, Container, Card } from "react-bootstrap";
 
-function Dashboard() {
+export default function Dashboard() {
   return (
     <div className="page-content p-3" id="content">
       <Container>
@@ -29,5 +29,3 @@ function Dashboard() {
     </div>
   );
 }
-
-export default Dashboard;

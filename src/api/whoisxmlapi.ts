@@ -6,7 +6,7 @@ export async function LookupDomain(domain) {
 
   const whoisApi = axios.create({
     baseURL: "https://www.whoisxmlapi.com/whoisserver",
-    Headers: {
+    headers: {
       "Content-Type": "text/json",
       "Referer": "https://tech-tools.one-comm.com",
       "Referrer-Policy": "strict-origin-when-cross-origin"
@@ -28,7 +28,7 @@ export async function LookupDNS(domain) {
 
   const whoisApi = axios.create({
     baseURL: "https://www.whoisxmlapi.com/whoisserver",
-    Headers: {
+    headers: {
       "Content-Type": "text/json",
       "Referer": "https://tech-tools.one-comm.com",
       "Referrer-Policy": "strict-origin-when-cross-origin"

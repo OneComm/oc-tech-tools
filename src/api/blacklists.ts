@@ -7,9 +7,10 @@ export async function LookupBlacklists(domain) {
   const blacklistApi = axios.create({
     baseURL: `https://api.blacklistchecker.com`,
     auth: {
-      username: apiKey
+      username: apiKey,
+      password: null
     },
-    Headers: {
+    headers: {
       "Content-Type": "text/json",
       "Referer": "https://tech-tools.one-comm.com",
       "Referrer-Policy": "strict-origin-when-cross-origin"

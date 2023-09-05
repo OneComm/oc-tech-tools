@@ -1,8 +1,9 @@
 import React from 'react';
+import { useMsal } from '@azure/msal-react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
-function Header(props) {
-  const { instance, accounts } = props;
+function Header() {
+  const { instance, accounts } = useMsal();
 
   const account = accounts[0];
 
