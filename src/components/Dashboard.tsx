@@ -10,9 +10,9 @@ export default function Dashboard() {
             <Card>
               <Card.Body>
               <Card.Title className="border-bottom py-1">Recent news</Card.Title>
-              <p>This is a growing set of tools to assist with daily operations. Functionality is currently in development, but a few utilities are available for use.</p>
+              <p>This is a growing set of tools to assist with daily tasks. Functionality is currently in development, but a few utilities are available for use.</p>
               </Card.Body>
-              <Card.Footer><small><strong>Updated:</strong> Oct 11, 2022</small></Card.Footer>
+              <Card.Footer><small><strong>Updated:</strong> Sep 5, 2023</small></Card.Footer>
             </Card>
           </Col>
           <Col>
