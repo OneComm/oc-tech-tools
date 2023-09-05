@@ -16,7 +16,6 @@ export async function LookupDomain(domain: string) {
         apiKey,
       }
     });
-    console.log(domain);
     return domain;
   } catch (error) {
     
@@ -39,7 +38,6 @@ export async function LookupDNS(domain: string) {
         apiKey,
       }
     });
-    console.log(dns);
     return dns;
   } catch (error) {
     

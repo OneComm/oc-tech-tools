@@ -109,7 +109,7 @@ export default function Domain() {
     const whois = domainResult.data.WhoisRecord;
     updateDomainData(whois);
     const dnsResult = await LookupDNS(formData.domain);
-    const dns = dnsResult.data.DNSData.dnsRecords;
+    const dns: DnsRecord[] = dnsResult.data.DNSData.dnsRecords;
     for (let i = 0; i < dns.length; i++) {
       const record = dns[i];
       updateDnsData(dnsData => [...dnsData, record]);
