@@ -43,7 +43,7 @@ export default function Navigation() {
               <Link className='nav-link' to="/">Dashboard</Link>
               
               <hr/>
-              <Navbar.Text as='h6' className='text-uppercase text-white'>Utilities</Navbar.Text>
+              <Navbar.Text as='h6' className='text-uppercase text-white'>Tools</Navbar.Text>
               <Link className='nav-link' to="/tools/domain">
                 <OverlayTrigger
                   key='domain'
