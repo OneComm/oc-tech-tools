@@ -20,7 +20,7 @@ export default function Dashboard() {
               <Card.Body>
               <Card.Title className="border-bottom py-1">Found bugs?</Card.Title>
               <p>This tool is still in development. Bugs and issues may be encountered.</p>
-              <p>Please submit any bugs or issues found <a href='mailto:techtoolsbugreport@fire.fundersclub.com' style={{color:'white'}}>via email</a>.</p>
+              <p>Please submit any bugs or issues found <a href='mailto:tech-tools@one-comm.com' style={{color:'white'}}>via email</a>.</p>
               </Card.Body>
             </Card>
           </Col>
