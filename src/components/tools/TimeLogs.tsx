@@ -42,19 +42,16 @@ export default function TimeLogs() {
 
   //settings state
   const initialSettingsState = {
-    teamworkApiKey: "",
-    intuitApiKey: ""
+    teamworkApiKey: ""
   }
   const [timelogSettings, setTimelogSettings] = useState(initialSettingsState);
 
   useEffect(() => {
     const teamworkApiKey = localStorage.getItem("teamworkApiKey") || "";
-    const intuitApiKey = localStorage.getItem("intuitApiKey") || "";
 
     setTimelogSettings({
       ...timelogSettings,
-      teamworkApiKey,
-      intuitApiKey
+      teamworkApiKey
     });
 
     setTimeout(() => {  
@@ -89,6 +86,7 @@ export default function TimeLogs() {
         setIsLoading(false);
       } else {}
     }, 2000);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleExportSubmit = async (e) => {
@@ -156,7 +154,6 @@ export default function TimeLogs() {
     e.preventDefault();
     console.log(timelogSettings);
     localStorage.setItem("teamworkApiKey", timelogSettings.teamworkApiKey);
-    localStorage.setItem("intuitApiKey", timelogSettings.intuitApiKey);
     window.location.reload();
   }
 
@@ -305,10 +302,6 @@ export default function TimeLogs() {
                       <Form.Control as="textarea" name="teamworkApiKey" value={timelogSettings.teamworkApiKey} onChange={handleTimelogSettingsChange} />
                       <Form.Text>Go to your <a href="https://onecomm.teamwork.com/desk/myprofile/apikeys" target="_blank" rel="noreferrer">teamwork desk profile</a> and generate a v2 api key with no expiration.</Form.Text>
                     </Form.Group>
-                    <Form.Group as={Col}>
-                      <Form.Label>Intuit API Key</Form.Label>
-                      <Form.Control as="textarea" name="intuitApiKey" value={timelogSettings.intuitApiKey} onChange={handleTimelogSettingsChange} />
-                    </Form.Group>
                   </Row>
                   <Row className="mb-3">
                     <Col></Col>
@@ -330,10 +323,6 @@ export default function TimeLogs() {
                       <Form.Label>Teamwork API Key</Form.Label>
                       <Form.Control as="textarea" name="teamworkApiKey" value={timelogSettings.teamworkApiKey} onChange={handleTimelogSettingsChange} />
                       <Form.Text>Go to your <a href="https://onecomm.teamwork.com/desk/myprofile/apikeys" target="_blank" rel="noreferrer">teamwork desk profile</a> and generate a v2 api key with no expiration.</Form.Text>
-                    </Form.Group>
-                    <Form.Group as={Col}>
-                      <Form.Label>Intuit API Key</Form.Label>
-                      <Form.Control as="textarea" name="intuitApiKey" value={timelogSettings.intuitApiKey} onChange={handleTimelogSettingsChange} />
                     </Form.Group>
                   </Row>
                   <Row className="mb-3">
