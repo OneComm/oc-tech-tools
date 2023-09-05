@@ -49,25 +49,25 @@ export default function Domain() {
   const [isLoading, setLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, updateFormData] = useState<FormData>({ domain: "" });
-const [domainData, updateDomainData] = useState<DomainData>({
-  createdDate: "",
-  updatedDate: "",
-  expiresDate: "",
-  domainName: "",
-  registrant: {
-    organization: "",
-    state: "",
-    countryCode: ""
-  },
-  contactEmail: ""
-});
-const [dnsData, updateDnsData] = useState<DnsRecord[]>([]);
-const [blacklistData, updateBlacklistData] = useState<BlacklistData>({
-  detections: 0,
-  input_raw: "",
-  blacklists: [],
-  checks_remaining: "",
-});
+  const [domainData, updateDomainData] = useState<DomainData>({
+    createdDate: "",
+    updatedDate: "",
+    expiresDate: "",
+    domainName: "",
+    registrant: {
+      organization: "",
+      state: "",
+      countryCode: ""
+    },
+    contactEmail: ""
+  });
+  const [dnsData, updateDnsData] = useState<DnsRecord[]>([]);
+  const [blacklistData, updateBlacklistData] = useState<BlacklistData>({
+    detections: 0,
+    input_raw: "",
+    blacklists: [],
+    checks_remaining: "",
+  });
 
   const [open, setOpen] = useState(false);
   const [bldLgShow, setBldLgShow] = useState(false);
