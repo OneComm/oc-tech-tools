@@ -98,6 +98,19 @@ export default function Navigation() {
                   <p>Option 125 Helper</p>
                 </OverlayTrigger>
               </Link>
+              <Link className='nav-link' to="/tools/smdr">
+                <OverlayTrigger
+                  key='smdr'
+                  placement='right'
+                  overlay={
+                    <Tooltip>
+                      Tool for decoding SMDR
+                    </Tooltip>
+                  }
+                >
+                  <p>SMDR Helper</p>
+                </OverlayTrigger>
+              </Link>
             </Nav>
           </Navbar>
         </div>

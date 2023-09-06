@@ -16,6 +16,7 @@ import Option125 from './components/tools/Option125';
 import NotFound from './components/global/NotFound';
 import MobileError from './components/global/MobileError';
 import 'bootstrap/dist/css/bootstrap.css';
+import Smdr from './components/tools/Smdr';
 
 type AppProps = {
   pca: IPublicClientApplication;
@@ -46,6 +47,7 @@ export default function App({ pca }: AppProps) {
             <Route path="/tools/timelogs" element={ <TimeLogs /> } />
             <Route path="/tools/opt43" element={ <Option43 /> } />
             <Route path="/tools/opt125" element={ <Option125 /> } />
+            <Route path="/tools/smdr" element={ <Smdr /> } />
             <Route path="*" element={ <NotFound />} />
           </Routes>
         </AuthenticatedTemplate>
