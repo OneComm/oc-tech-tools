@@ -50,7 +50,7 @@ export default function Smdr() {
     });
     // eslint-disable-next-line array-callback-return
     const filteredPbx = filteredBlank.filter(line => {
-      if (line.substring(0,2).search(/\d[A-Za-z]/)) return line;
+      if (line.substring(0,2).search(/\d+\s[A-Za-z]/)) return line;
     });
     const newSmdrData = filteredPbx.map(record => ConvertSmdr(record));
     updateSmdrData([...smdrData, ...newSmdrData]);
