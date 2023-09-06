@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Form, Button, Collapse, Card, Table } from 'react-bootstrap';
+import { Container, Row, Form, Button, Collapse, Card, Table, FormCheck } from 'react-bootstrap';
 import { ConvertSmdr } from '../../api/convertSmdr';
 
 export default function Smdr() {
@@ -17,7 +17,7 @@ export default function Smdr() {
     attendantInvolved: boolean,
     timeToAnswer: string,
     digitsDialed: string,
-    callCompletetionStatus: string,
+    callCompletionStatus: string,
     speedCallCallForwardFlag: string,
     calledParty: string,
   }
@@ -79,19 +79,20 @@ export default function Smdr() {
           </Form>
           <Collapse in={ open }>
             <Container>
-              <Table striped>
+              
+              <Table striped size="sm">
                 <thead>
                   <tr>
+                    <th><FormCheck /></th>
                     <th>Date</th>
                     <th>Start Time</th>
                     <th>Duration</th>
                     <th>Calling Party</th>
-                    <th>Attendant Involved</th>
-                    <th>Time to Answer</th>
-                    <th>Digits Dialed</th>
-                    <th>Call Completeion Status</th>
-                    <th>Call Flag</th>
                     <th>Called Party</th>
+                    <th>Digits Dialed</th>
+                    <th>Time to Answer (Incoming)</th>
+                    <th>Call Completion Status</th>
+                    <th>Call Flag</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -99,16 +100,16 @@ export default function Smdr() {
                     const id = Math.random();
                     return (
                       <tr key={id}>
+                        <td><FormCheck /></td>
                         <td>{record.date}</td>
                         <td>{record.startTime}</td>
                         <td>{record.duration}</td>
                         <td>{record.callingParty}</td>
-                        <td>{record.attendantInvolved}</td>
-                        <td>{record.timeToAnswer}</td>
-                        <td>{record.digitsDialed}</td>
-                        <td>{record.callCompletetionStatus}</td>
-                        <td>{record.speedCallCallForwardFlag}</td>
                         <td>{record.calledParty}</td>
+                        <td>{record.digitsDialed}</td>
+                        <td>{record.timeToAnswer}</td>
+                        <td>{record.callCompletionStatus}</td>
+                        <td>{record.speedCallCallForwardFlag}</td>
                       </tr>
                     )
                   })}

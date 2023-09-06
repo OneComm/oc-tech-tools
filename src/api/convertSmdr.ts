@@ -8,7 +8,7 @@ function ConvertSmdr (str) {
     attendantInvolved: boolean,
     timeToAnswer: string,
     digitsDialed: string,
-    callCompletetionStatus: string,
+    callCompletionStatus: string,
     speedCallCallForwardFlag: string,
     calledParty: string,
   }
@@ -27,7 +27,7 @@ function ConvertSmdr (str) {
     attendantInvolved: attendantBool,
     timeToAnswer: smdrStr.substr(36,4),
     digitsDialed: smdrStr.substr(41,25),
-    callCompletetionStatus: smdrStr.substr(67,1),
+    callCompletionStatus: smdrStr.substr(67,1),
     speedCallCallForwardFlag: smdrStr.substr(68,1),
     calledParty: smdrStr.substr(69,7),
   }
