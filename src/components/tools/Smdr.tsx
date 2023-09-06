@@ -46,12 +46,13 @@ export default function Smdr() {
     const smdrArray = formData.smdr.split("\n");
     // eslint-disable-next-line array-callback-return
     const filteredBlank = smdrArray.filter(line => {
-      if (line.substring(0,5) !== "     ") return line;
+      if (line.substring(0,4) !== "    ") return line;
     });
     // eslint-disable-next-line array-callback-return
     const filteredPbx = filteredBlank.filter(line => {
-      if (line.substring(0,2).search(/\d+\s[A-Za-z]/)) return line;
+      if (line.substring(0,3).search(/\d+\s[A-Za-z]/)) return line;
     });
+    console.log(filteredPbx);
     const newSmdrData = filteredPbx.map(record => ConvertSmdr(record));
     updateSmdrData([...smdrData, ...newSmdrData]);
     setOpen(true);
