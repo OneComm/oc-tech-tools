@@ -82,7 +82,6 @@ export default function Smdr() {
               <Table striped>
                 <thead>
                   <tr>
-                    <th>Long Call</th>
                     <th>Date</th>
                     <th>Start Time</th>
                     <th>Duration</th>
@@ -91,7 +90,7 @@ export default function Smdr() {
                     <th>Time to Answer</th>
                     <th>Digits Dialed</th>
                     <th>Call Completeion Status</th>
-                    <th>Speed Call/Forward Flag</th>
+                    <th>Call Flag</th>
                     <th>Called Party</th>
                   </tr>
                 </thead>
@@ -100,7 +99,6 @@ export default function Smdr() {
                     const id = Math.random();
                     return (
                       <tr key={id}>
-                        <td>{record.longCall}</td>
                         <td>{record.date}</td>
                         <td>{record.startTime}</td>
                         <td>{record.duration}</td>
