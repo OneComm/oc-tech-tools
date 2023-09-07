@@ -96,18 +96,18 @@ export default function Smdr() {
                   <tr>
                     <th><FormCheck /></th>
                     <th>Date</th>
-                    <th>Start Time</th>
+                    <th>Time</th>
                     <th>Duration</th>
-                    <th>Calling Party</th>
-                    <th>Called Party</th>
-                    <th>Digits Dialed</th>
-                    <th>Time to Answer (Incoming)</th>
-                    <th>Call Completion Status</th>
-                    <th>Call Flag</th>
-                    <th>Node ID</th>
+                    <th>Source <small>?</small></th>
+                    <th>Termination <small>?</small></th>
                     <th>ANI</th>
                     <th>DNIS</th>
-                    <th>Call Identifier</th>
+                    <th>Digits Dialed</th>
+                    <th>TTA <small>?</small></th>
+                    <th>Status <small>?</small></th>
+                    <th>Flags <small>?</small></th>
+                    <th>Node</th>
+                    <th>Identifier</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -121,13 +121,13 @@ export default function Smdr() {
                         <td>{record.duration}</td>
                         <td>{record.callingParty}</td>
                         <td>{record.calledParty}</td>
+                        <td>{record.ani}</td>
+                        <td>{record.dnis}</td>
                         <td>{record.digitsDialed}</td>
                         <td>{record.timeToAnswer}</td>
                         <td>{record.callCompletionStatus}</td>
                         <td>{record.speedCallCallForwardFlag}</td>
                         <td>{record.systemIdentifier}</td>
-                        <td>{record.ani}</td>
-                        <td>{record.dnis}</td>
                         <td>{record.callIdentifier}</td>
                       </tr>
                     )
