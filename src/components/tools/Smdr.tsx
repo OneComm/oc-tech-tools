@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Form, Button, Collapse, Card, Table, FormCheck } from 'react-bootstrap';
+import { Container, Row, Form, Button, Collapse, Card, Table, OverlayTrigger,Tooltip } from 'react-bootstrap';
 import { ConvertSmdr } from '../../api/convertSmdr';
 
 export default function Smdr() {
@@ -97,14 +97,123 @@ export default function Smdr() {
                     <th>Date</th>
                     <th>Time</th>
                     <th>Duration</th>
-                    <th>Source <small>?</small></th>
-                    <th>Termination <small>?</small></th>
+                    <th>
+                      Source 
+                      <OverlayTrigger
+                        key='tta'
+                        placement='top'
+                        overlay={
+                          <Tooltip>
+                            Calling Party Number
+                          </Tooltip>
+                        }
+                      >
+                        <u><small>?</small></u>
+                      </OverlayTrigger>
+                    </th>
+                    <th>
+                      Termination 
+                      <OverlayTrigger
+                        key='tta'
+                        placement='top'
+                        overlay={
+                          <Tooltip>
+                            Called Party Number
+                          </Tooltip>
+                        }
+                      >
+                        <u><small>?</small></u>
+                      </OverlayTrigger>
+                    </th>
                     <th>ANI</th>
                     <th>DNIS</th>
                     <th>Digits Dialed</th>
-                    <th>TTA <small>?</small></th>
-                    <th>Status <small>?</small></th>
-                    <th>Flags <small>?</small></th>
+                    <th>
+                      TTA 
+                      <OverlayTrigger
+                        key='tta'
+                        placement='top'
+                        overlay={
+                          <Tooltip>
+                            Time to Answer. Applies to incoming calls only.
+                          </Tooltip>
+                        }
+                      >
+                        <u><small>?</small></u>
+                      </OverlayTrigger>
+                    </th>
+                    <th>
+                      Status 
+                      <OverlayTrigger
+                        key='status'
+                        placement='top'
+                        overlay={
+                          <Tooltip>
+                            <b>Call Completion Status</b>
+                            <Table size='sm' style={{color: 'white'}}>
+                              <thead>
+                                <th>Symbol</th>
+                                <th>Description</th>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>A</td>
+                                  <td>Answer Supervision</td>
+                                </tr>
+                                <tr>
+                                  <td>B</td>
+                                  <td>Called Party Busy</td>
+                                </tr>
+                                <tr>
+                                  <td>E</td>
+                                  <td>Call Error</td>
+                                </tr>
+                                <tr>
+                                  <td>T</td>
+                                  <td>Toll Denied</td>
+                                </tr>
+                                <tr>
+                                  <td>I</td>
+                                  <td>Internal Call</td>
+                                </tr>
+                              </tbody>
+                            </Table>
+                          </Tooltip>
+                        }
+                      >
+                        <u><small>?</small></u>
+                      </OverlayTrigger>
+                    </th>
+                    <th>
+                      Flags 
+                      <OverlayTrigger
+                        key='status'
+                        placement='top'
+                        overlay={
+                          <Tooltip>
+                            <b>Call Flags</b>
+                            <Table size='sm' style={{color: 'white'}}>
+                              <thead>
+                                <th>Symbol</th>
+                                <th>Description</th>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>S</td>
+                                  <td>Speed Call</td>
+                                </tr>
+                                <tr>
+                                  <td>F</td>
+                                  <td>External call forwarded using External Call Forward or internal call forwarded using Call Forward</td>
+                                </tr>
+                              </tbody>
+                            </Table>
+                          </Tooltip>
+                        }
+                      >
+                        <u><small>?</small></u>
+                      </OverlayTrigger>
+                    </th>
                     <th>Node</th>
                     <th>Identifier</th>
                   </tr>
