@@ -56,16 +56,19 @@ export default function Smdr() {
     const filteredPbx = smdrArray.filter(line => {
       if (line.substring(0,3).search(/\d+\s[A-Za-z]/)) return line;
     }); 
-    for (var i = 0; i < filteredPbx.length - 1; i++) { // I want to concatenate the middle elements
-      filteredPbx[i] += filteredPbx[i + 1]; //I want to concatenate it with the element that follows
-      filteredPbx.splice(i + 1, 1); //eliminating the element that follows
+    // eslint-disable-next-line array-callback-return
+    const filteredLogsys = filteredPbx.filter(line => {
+      if (line.substring(0,6) !== "LOGSYS") return line;
+    })
+    for (var i = 0; i < filteredLogsys.length - 1; i++) { // I want to concatenate the middle elements
+      filteredLogsys[i] += filteredLogsys[i + 1]; //I want to concatenate it with the element that follows
+      filteredLogsys.splice(i + 1, 1); //eliminating the element that follows
     }
-    console.log(filteredPbx);
-    const newSmdrData = filteredPbx.map(record => ConvertSmdr(record));
+    console.log(filteredLogsys);
+    const newSmdrData = filteredLogsys.map(record => ConvertSmdr(record));
     updateSmdrData([...smdrData, ...newSmdrData]);
     setOpen(true);
   };
-
   return (
     <div className='page-content p-3'>
       <Card>
