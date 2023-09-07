@@ -11,6 +11,10 @@ function ConvertSmdr (str) {
     callCompletionStatus: string,
     speedCallCallForwardFlag: string,
     calledParty: string,
+    systemIdentifier: string,
+    ani: string,
+    dnis: string,
+    callIdentifier: string,
   }
 
   let smdrStr = str;
@@ -30,6 +34,10 @@ function ConvertSmdr (str) {
     callCompletionStatus: smdrStr.substr(67,1),
     speedCallCallForwardFlag: smdrStr.substr(68,1),
     calledParty: smdrStr.substr(69,7),
+    systemIdentifier: smdrStr.substr(107,3),
+    ani: smdrStr.substr(113,10),
+    dnis: smdrStr.substr(134,10),
+    callIdentifier: smdrStr.substr(153,10)
   }
 
   return smdrObj;

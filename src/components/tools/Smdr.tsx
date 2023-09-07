@@ -20,6 +20,10 @@ export default function Smdr() {
     callCompletionStatus: string,
     speedCallCallForwardFlag: string,
     calledParty: string,
+    systemIdentifier: string,
+    ani: string,
+    dnis: string,
+    callIdentifier: string,
   }
 
   interface SmdrArray extends Array<SmdrObject>{};
@@ -45,13 +49,17 @@ export default function Smdr() {
     e.preventDefault()
     const smdrArray = formData.smdr.split("\n");
     // eslint-disable-next-line array-callback-return
-    const filteredBlank = smdrArray.filter(line => {
+    /* const filteredBlank = smdrArray.filter(line => {
       if (line.substring(0,4) !== "    ") return line;
-    });
+    }); */
     // eslint-disable-next-line array-callback-return
-    const filteredPbx = filteredBlank.filter(line => {
+    const filteredPbx = smdrArray.filter(line => {
       if (line.substring(0,3).search(/\d+\s[A-Za-z]/)) return line;
-    });
+    }); 
+    for (var i = 0; i < filteredPbx.length - 1; i++) { // I want to concatenate the middle elements
+      filteredPbx[i] += filteredPbx[i + 1]; //I want to concatenate it with the element that follows
+      filteredPbx.splice(i + 1, 1); //eliminating the element that follows
+    }
     console.log(filteredPbx);
     const newSmdrData = filteredPbx.map(record => ConvertSmdr(record));
     updateSmdrData([...smdrData, ...newSmdrData]);
@@ -93,6 +101,10 @@ export default function Smdr() {
                     <th>Time to Answer (Incoming)</th>
                     <th>Call Completion Status</th>
                     <th>Call Flag</th>
+                    <th>Node ID</th>
+                    <th>ANI</th>
+                    <th>DNIS</th>
+                    <th>Call Identifier</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -110,6 +122,10 @@ export default function Smdr() {
                         <td>{record.timeToAnswer}</td>
                         <td>{record.callCompletionStatus}</td>
                         <td>{record.speedCallCallForwardFlag}</td>
+                        <td>{record.systemIdentifier}</td>
+                        <td>{record.ani}</td>
+                        <td>{record.dnis}</td>
+                        <td>{record.callIdentifier}</td>
                       </tr>
                     )
                   })}
