@@ -94,7 +94,6 @@ export default function Smdr() {
               <Table striped size="sm">
                 <thead>
                   <tr>
-                    <th><FormCheck /></th>
                     <th>Date</th>
                     <th>Time</th>
                     <th>Duration</th>
@@ -115,7 +114,6 @@ export default function Smdr() {
                     const id = Math.random();
                     return (
                       <tr key={id}>
-                        <td><FormCheck /></td>
                         <td>{record.date}</td>
                         <td>{record.startTime}</td>
                         <td>{record.duration}</td>
