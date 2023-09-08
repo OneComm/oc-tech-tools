@@ -3,7 +3,7 @@ import Loading from '../global/Loading';
 import { LookupDomain, LookupDNS } from '../../api/whoisxmlapi';
 import { LookupBlacklists } from '../../api/blacklists';
 import SecsToTime from '../../api/secsToTime';
-import { Container, Row, Col, Form, Button, Collapse, Table, Card, Modal } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Collapse, Table, Card, Modal, Spinner } from 'react-bootstrap';
 
 
 export default function Domain() {
@@ -83,7 +83,6 @@ export default function Domain() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     if (open) setOpen(false);
-    setIsSubmitted(true);
     setLoading(true);
     e.preventDefault();
     updateDomainData({
@@ -119,6 +118,7 @@ export default function Domain() {
     updateBlacklistData(blacklist);
     setLoading(false);
     setOpen(true);
+    setIsSubmitted(true);
   };
 
 const handleNew = (e) => {
@@ -156,9 +156,6 @@ const handleNew = (e) => {
           <Row className="py-2 mb-3">
             <p>Input the domain name to pull back information such as DNS records, MX records, SPF records, as well as a blacklist check.</p>
           </Row>
-          {isLoading ? 
-          <Row><Loading /></Row>
-          :
           <Row>
             {!isSubmitted ? 
             <Form onSubmit={ handleSubmit }>
@@ -168,11 +165,24 @@ const handleNew = (e) => {
                   <Form.Control name="domain" type="text" placeholder="one-comm.com" onChange={ handleChange } />
                 </Form.Group>
                 <Form.Group as={ Col }>
-                  <Button className='' onClick={ handleSubmit }>Submit</Button>
+                  <Button className='' onClick={ handleSubmit } style={{marginTop: 32}}>
+                    {isLoading ? 
+                    <>
+                      <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                      />
+                      <span> Loading...</span>
+                    </>
+                    : <span>Submit</span> }
+                  </Button>
                 </Form.Group>
               </Row>
             </Form>
-            : null}
+            : null }
             <Collapse in={ open }>
               <Container>
                 <Row>
@@ -374,7 +384,6 @@ const handleNew = (e) => {
               </Container>
             </Collapse>
           </Row>
-          }
         </Card.Body>
       </Card>
     </div>
