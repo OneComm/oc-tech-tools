@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Loading from '../global/Loading';
 import { LookupDomain, LookupDNS } from '../../api/whoisxmlapi';
 import { LookupBlacklists } from '../../api/blacklists';
 import SecsToTime from '../../api/secsToTime';
