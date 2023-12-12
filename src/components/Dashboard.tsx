@@ -11,8 +11,10 @@ export default function Dashboard() {
               <Card.Body>
               <Card.Title className="border-bottom py-1">Recent news</Card.Title>
               <p>This is a growing set of tools to assist with daily tasks. Functionality is currently in development, but a few utilities are available for use.</p>
+              <h3>SMDR Tool Beta</h3>
+              <p>SMDR tool beta has been added. It has basic abiltity to read SMDR logs straight from MiVB. Please report any issues found using the link to the right.</p>
               </Card.Body>
-              <Card.Footer><small><strong>Updated:</strong> Sep 5, 2023</small></Card.Footer>
+              <Card.Footer><small><strong>Updated:</strong> Dec 12, 2023</small></Card.Footer>
             </Card>
           </Col>
           <Col>
