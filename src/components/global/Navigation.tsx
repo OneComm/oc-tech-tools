@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useMsal } from '@azure/msal-react';
 import { Nav, Navbar, OverlayTrigger,Tooltip } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/img/logo.svg';
@@ -14,15 +13,6 @@ export default function Navigation() {
 		if (process.env.REACT_APP_SLUG_DESCRIPTION) setGitHash(process.env.REACT_APP_SLUG_DESCRIPTION);
 		if (process.env.REACT_APP_RELEASE_CREATED_AT) setBuildDate(process.env.REACT_APP_RELEASE_CREATED_AT);
 	}, []);
-
-  const { accounts } = useMsal();
-  const account = accounts[0];
-  const azureGroupId = process.env.REACT_APP_AZURE_TIMELOGS_GROUP_ID;
-  // @ts-ignore
-  const accountGroups: string[] = account.idTokenClaims.groups;
-  const isTimelogsAuthorizedUser = accountGroups.some(group => {
-    return group === azureGroupId;
-  });
 
   return (
     <div className='d-flex flex-column vertical-nav text-white' id='sidebar'>
@@ -57,21 +47,6 @@ export default function Navigation() {
                   <p>Domain Tool</p>
                 </OverlayTrigger>
               </Link>
-              {isTimelogsAuthorizedUser ?
-              <Link className='nav-link' to="/tools/timelogs">
-                <OverlayTrigger
-                  key='domain'
-                  placement='right'
-                  overlay={
-                    <Tooltip>
-                      Tool for generating time logs from Teamwork Desk
-                    </Tooltip>
-                  }
-                >
-                  <p>Timelog Tool</p>
-                </OverlayTrigger>
-              </Link>
-              : null }
               <Link className='nav-link' to="/tools/opt43">
                 <OverlayTrigger
                   key='opt43'
