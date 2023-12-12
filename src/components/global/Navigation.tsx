@@ -29,7 +29,6 @@ export default function Navigation() {
         <div>
           <Navbar variant='dark'>
             <Nav className="flex-column">
-              <Navbar.Text as='h6' className='text-uppercase text-white'>Tools</Navbar.Text>
               <Link className='nav-link' to="/">Dashboard</Link>
               <Link className='nav-link' to="/tools/domain">
                 <OverlayTrigger
