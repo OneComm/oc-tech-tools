@@ -30,58 +30,10 @@ export default function Navigation() {
           <Navbar variant='dark'>
             <Nav className="flex-column">
               <Link className='nav-link' to="/">Dashboard</Link>
-              <Link className='nav-link' to="/tools/domain">
-                <OverlayTrigger
-                  key='domain'
-                  placement='right'
-                  overlay={
-                    <Tooltip>
-                      Tool for looking up domain information
-                    </Tooltip>
-                  }
-                >
-                  <p>Domain Tool</p>
-                </OverlayTrigger>
-              </Link>
-              <Link className='nav-link' to="/tools/opt43">
-                <OverlayTrigger
-                  key='opt43'
-                  placement='right'
-                  overlay={
-                    <Tooltip>
-                      Tool for generating option 43 hex strings
-                    </Tooltip>
-                  }
-                >
-                  <p>Option 43 Helper</p>
-                </OverlayTrigger>
-              </Link>
-              <Link className='nav-link' to="/tools/opt125">
-                <OverlayTrigger
-                  key='opt125'
-                  placement='right'
-                  overlay={
-                    <Tooltip>
-                      Tool for generating option 125 hex strings
-                    </Tooltip>
-                  }
-                >
-                  <p>Option 125 Helper</p>
-                </OverlayTrigger>
-              </Link>
-              <Link className='nav-link' to="/tools/smdr">
-                <OverlayTrigger
-                  key='smdr'
-                  placement='right'
-                  overlay={
-                    <Tooltip>
-                      Tool for decoding SMDR
-                    </Tooltip>
-                  }
-                >
-                  <p>SMDR Helper</p>
-                </OverlayTrigger>
-              </Link>
+              <Link className='nav-link' to="/tools/domain">Domain Tool</Link>
+              <Link className='nav-link' to="/tools/opt43">Option 43 Helper</Link>
+              <Link className='nav-link' to="/tools/opt125">Option 125 Helper</Link>
+              <Link className='nav-link' to="/tools/smdr">SMDR Helper</Link>
             </Nav>
           </Navbar>
         </div>
