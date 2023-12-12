@@ -10,7 +10,6 @@ import Header from './components/global/Header';
 import Navigation from './components/global/Navigation';
 import Dashboard from './components/Dashboard';
 import Domain from './components/tools/Domain';
-import TimeLogs from './components/tools/TimeLogs';
 import Option43 from './components/tools/Option43';
 import Option125 from './components/tools/Option125';
 import NotFound from './components/global/NotFound';
@@ -44,7 +43,6 @@ export default function App({ pca }: AppProps) {
           <Routes>
             <Route path="/" element={ <Dashboard /> } />
             <Route path="/tools/domain" element={ <Domain /> } />
-            <Route path="/tools/timelogs" element={ <TimeLogs /> } />
             <Route path="/tools/opt43" element={ <Option43 /> } />
             <Route path="/tools/opt125" element={ <Option125 /> } />
             <Route path="/tools/smdr" element={ <Smdr /> } />
